@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class OstrichLogic : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class OstrichLogic : MonoBehaviour
     public Transform EndPoint;
 
     public float Speed;
+    public float SpeedMultiplaier;
     public float FastSpeed;
     public float SlowSpeed;
 
@@ -22,28 +24,9 @@ public class OstrichLogic : MonoBehaviour
     void Update()
     {
         // Looks at the x axis may be change to z
-        if (Vector3.Distance(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.position.x, transform.position.y, Player.transform.position.z)) < 80)
-        {
-            if (Speed > SlowSpeed)
-            {
-                Speed -= Time.deltaTime / 2;
-            }
-            else
-            {
-                Speed = SlowSpeed;
-            }
-        }
-        else
-        {
-            if (Speed < FastSpeed)
-            {
-                Speed += Time.deltaTime / 2;
-            }
-            else
-            {
-                Speed = FastSpeed;
-            }
-        }
+        float distance = Vector3.Distance(new Vector3(0, 0, transform.position.z), new Vector3(0, 0, Player.transform.position.z));
+
+        Speed = Mathf.Clamp(distance * SpeedMultiplaier, SlowSpeed, FastSpeed);
     }
     private void FixedUpdate()
     {
