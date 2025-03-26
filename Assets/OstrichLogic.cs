@@ -3,6 +3,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class OstrichLogic : MonoBehaviour
 {
+    [Header("Move Around")]
     public Transform StartPoint;
     public Transform EndPoint;
 
@@ -11,32 +12,74 @@ public class OstrichLogic : MonoBehaviour
     public float FastSpeed;
     public float SlowSpeed;
 
-
     public GameObject Player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    [Header("Feather")]
+    public GameObject FeatherTarget;
+    public GameObject FeatherPrefab;
+    private bool CastFeatherOnce;
+
+
+    [Header("Spawn")]
+    public GameObject MoveUpTo;
+    private bool ReadyToFly;
+    public float MoveUpSpeed;
+
+
+    private void Start()
     {
-        transform.position = StartPoint.position;
+        CastFeatherOnce = true;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        // Looks at the x axis may be change to z
+        // Looks at the z axis may be change to x
         float distance = Vector3.Distance(new Vector3(0, 0, transform.position.z), new Vector3(0, 0, Player.transform.position.z));
 
         Speed = Mathf.Clamp(distance * SpeedMultiplaier, SlowSpeed, FastSpeed);
+
+
+        // Feather
+        if (CastFeatherOnce == false)
+        {
+            if (Vector3.Distance(new Vector3(0, 0, transform.position.z), new Vector3(0, 0, Player.transform.position.z)) < 1)
+            {
+                Feather _feather = Instantiate(FeatherPrefab, transform.position, transform.rotation).GetComponent<Feather>();
+
+                _feather.Target = FeatherTarget;
+
+                CastFeatherOnce = true;
+            }
+        }
     }
+
     private void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, EndPoint.position) < .01)
+        if (ReadyToFly == true)
         {
-            transform.position = StartPoint.position;
+            if (Vector3.Distance(transform.position, EndPoint.position) < .01)
+            {
+                transform.position = StartPoint.position;
+                CastFeatherOnce = false;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, EndPoint.position, Speed);
+            }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, EndPoint.position, Speed);
+            if (Vector3.Distance(new Vector3(0, transform.position.y, 0), new Vector3(0, MoveUpTo.transform.position.y, 0)) < .01)
+            {
+                ReadyToFly = true;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, MoveUpTo.transform.position.y, transform.position.z), MoveUpSpeed);
+            }
         }
     }
 }
