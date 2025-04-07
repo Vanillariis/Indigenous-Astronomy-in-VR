@@ -201,6 +201,8 @@ Shader "Custom/SandURP"
                 float3 modifiedNormal = SandNormal(input.worldPos, worldNormal);
 
                 // Light direction
+                //Light mainLight = GetMainLight();
+                //float3 lightDir = normalize(mainLight.direction);
                 float3 lightDir = normalize(_MainLightPosition.xyz);
 
                 // Get the final lighting result

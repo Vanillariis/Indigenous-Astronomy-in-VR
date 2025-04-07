@@ -102,18 +102,19 @@ Shader "Custom/SandURP2"
             }
 
             // Sand Normal Mapping
-            float3 SandNormal(float3 worldPos, float3 N)
+            float3 SandNormal(float3 worldPos, float3 N, float3 tangentWS, float3 bitangentWS)
             {
                 float2 uv = worldPos.xz * _SandTex_ST.xy + _SandTex_ST.zw;
                 float3 sandTexSample = UnpackNormal(SAMPLE_TEXTURE2D(_SandTex, sampler_SandTex, uv)).rgb;
                 
                 float3 S = normalize(sandTexSample * 2 - 1); // Ensure proper normalization
-                
                 float3 Ns = nlerp(N, S, _SandStrength);
-                return Ns;
+                float3x3 TBN = float3x3(tangentWS, bitangentWS, N);
+                float3 SandNormal = normalize(mul(Ns, TBN));
+                return SandNormal;
             }
 
-            float3 RipplesNormal(float3 worldPos, float3 N, float steepness)
+            float3 RipplesNormal(float3 worldPos, float3 N, float3 tangentWS, float3 bitangentWS, float steepness)
             {
                 float2 uv = worldPos.xz;
                 //uv = uv * _ShallowTex_ST.xy + _ShallowTex_ST.zw + _SteepTex_ST.xy + _SteepTex_ST.zw;
@@ -124,10 +125,17 @@ Shader "Custom/SandURP2"
                 float3 shallow = UnpackNormal(SAMPLE_TEXTURE2D(_ShallowTex, sampler_ShallowTex, shallowuv));
                 float3 steep   = UnpackNormal(SAMPLE_TEXTURE2D(_SteepTex, sampler_SteepTex, steepuv));
 
+                float3 blendTangent = nlerp(shallow, steep, steepness);
+                float3x3 TBN = float3x3(tangentWS, bitangentWS, N);
+                float3 worldNormal = normalize(mul(blendTangent, TBN));
+                return worldNormal;
+
+                /*float3 bob = shallow + steep;
                 // Blend normals based on steepness
-                float3 S = nlerp(steep, shallow, steepness);
+                //float3 S = nlerp(steep, shallow, steepness);
+                float3 S = nlerp(N, bob, steepness);
                 
-                return normalize(S);
+                return normalize(S);*/
             }
             
 
@@ -173,7 +181,7 @@ Shader "Custom/SandURP2"
             }
 
             // Glitter Specular Effect (Matches Original)
-            float3 GlitterSpecular(float3 worldPos, float3 N, float3 L, float3 V)
+            float3 GlitterSpecular(float3 worldPos, float3 N, float3 L, float3 V, float3 tangentWS, float3 bitangentWS)
             {
                 float2 uv = worldPos.xz;
                 uv = uv * _GlitterTex_ST.xy + _GlitterTex_ST.zw;
@@ -181,20 +189,23 @@ Shader "Custom/SandURP2"
                 float3 G = normalize(SAMPLE_TEXTURE2D(_GlitterTex, sampler_GlitterTex, uv).rgb * 2 - 1);
                 float3 R = reflect(L, G);
                 float RdotV = max(0, dot(R, V));
-
+                
                 if (RdotV < _GlitterThreshold)
                     return 0;
-
-                return (1 - RdotV) * _GlitterColor.rgb;
+                float3x3 TBN = float3x3(tangentWS, bitangentWS, N);
+                float3 R_Tangent = normalize(mul(TBN, R)); // Transform to tangent space
+                float sparkleFactor = saturate(R_Tangent.z); // Z+ in tangent space is surface-facing
+                
+                return (1 - sparkleFactor) * _GlitterColor.rgb;
             }
 
             // Lighting Function (Recreating LightingDesert)
-            float3 LightingDesert(float3 normal, float3 viewDir, float3 lightDir, float3 worldPos, float3 lightColor, float lightIntensity)
+            float3 LightingDesert(float3 normal, float3 viewDir, float3 lightDir, float3 worldPos, float3 lightColor, float lightIntensity, float3 tangentWS, float3 bitangentWS)
             {
                 float3 diffuseColor = DiffuseColor(normal, lightDir);
                 float3 rimColor = RimLighting(normal, viewDir);
                 float3 oceanColor = OceanSpecular(normal, lightDir, viewDir);
-                float3 glitterColor = GlitterSpecular(worldPos, normal, lightDir, viewDir);
+                float3 glitterColor = GlitterSpecular(worldPos, normal, lightDir, viewDir, tangentWS, bitangentWS);
 
                 float3 specularColor = saturate(max(rimColor, oceanColor));
                 float3 Color = (diffuseColor + specularColor + glitterColor) * lightColor * lightIntensity;
@@ -205,7 +216,6 @@ Shader "Custom/SandURP2"
             // Fragment Shader (Handles Normal Mapping + Lighting)
             half4 frag(Varyings input) : SV_Target
             {
-                
                 // Calculate the view direction manually (World space view direction)
                 float3 cameraPos = _WorldSpaceCameraPos.xyz;  // Built-in variable for camera position in world space
                 float3 viewDir = normalize(cameraPos - input.worldPos);  // Calculate view direction
@@ -215,10 +225,10 @@ Shader "Custom/SandURP2"
                 
                 float steepness = saturate(dot(N_WORLD, UP_WORLD));
                 steepness = pow(steepness, _SteepnessSharpnessPower);
-                float3 shallow = UnpackNormal(SAMPLE_TEXTURE2D(_ShallowTex, sampler_ShallowTex, input.uv));
-                shallow *= _SteepnessSharpnessPower;
-                shallow = normalize(shallow);
-                return half4(shallow, 1);
+                //float3 shallow = UnpackNormal(SAMPLE_TEXTURE2D(_ShallowTex, sampler_ShallowTex, input.uv));
+                //shallow *= _SteepnessSharpnessPower;
+                //shallow = normalize(shallow);
+                //return half4(shallow, 1);
                 
                 
                 // Get world normal and modify it using SandNormal
@@ -231,7 +241,8 @@ Shader "Custom/SandURP2"
                 float3 N = normalize(input.normalWS);
                 
                 //N = RipplesNormal(input.worldPos, N, steepness);
-                N = SandNormal(input.worldPos, N);
+                N = RipplesNormal(input.worldPos, N, input.tangentWS, input.bitangentWS, steepness);
+                N = SandNormal(input.worldPos, N, input.tangentWS, input.bitangentWS);
 
                 N = normalize(N);
                 
@@ -243,7 +254,7 @@ Shader "Custom/SandURP2"
                 //float3 lightDir = normalize(_MainLightPosition.xyz);
 
                 // Get the final lighting result
-                float3 lightingResult = shadowAttenuation * LightingDesert(N, viewDir, lightDir, input.worldPos, mainLight.color, mainLight.distanceAttenuation);
+                float3 lightingResult = shadowAttenuation * LightingDesert(N, viewDir, lightDir, input.worldPos, mainLight.color, mainLight.distanceAttenuation, input.tangentWS, input.bitangentWS);
 
                 uint additionalLightsCount = GetAdditionalLightsCount();
                 for (uint i = 0; i < additionalLightsCount; ++i)
@@ -251,7 +262,7 @@ Shader "Custom/SandURP2"
                     Light light = GetAdditionalLight(i, input.worldPos);
                     float3 additionalLightDir = normalize(light.direction);
                     float attenuation = light.distanceAttenuation * light.shadowAttenuation;
-                    lightingResult += attenuation * LightingDesert(N, viewDir, additionalLightDir, input.worldPos, light.color, light.distanceAttenuation);
+                    lightingResult += attenuation * LightingDesert(N, viewDir, additionalLightDir, input.worldPos, light.color, light.distanceAttenuation, input.tangentWS, input.bitangentWS);
                 }
                 
                 // Sample the albedo texture (MainTex)
