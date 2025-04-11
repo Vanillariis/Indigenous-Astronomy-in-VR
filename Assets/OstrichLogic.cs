@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class OstrichLogic : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class OstrichLogic : MonoBehaviour
     public float SlowSpeed;
 
     public GameObject Player;
+    private Animator Ani;
 
 
     [Header("Feather")]
@@ -22,6 +22,8 @@ public class OstrichLogic : MonoBehaviour
 
 
     [Header("Spawn")]
+    public float WaitToFlyTimerMax;
+    private float WaitToFlyTimer;
     public GameObject MoveUpTo;
     private bool ReadyToFly;
     public float MoveUpSpeed;
@@ -30,6 +32,8 @@ public class OstrichLogic : MonoBehaviour
     private void Start()
     {
         CastFeatherOnce = true;
+
+        Ani = GetComponentInChildren<Animator>();
     }
 
 
@@ -74,7 +78,15 @@ public class OstrichLogic : MonoBehaviour
         {
             if (Vector3.Distance(new Vector3(0, transform.position.y, 0), new Vector3(0, MoveUpTo.transform.position.y, 0)) < .01)
             {
-                ReadyToFly = true;
+                if (WaitToFlyTimer > WaitToFlyTimerMax)
+                {
+                    ReadyToFly = true;
+                    Ani.SetBool("Fly", true);
+                }
+                else
+                {
+                    WaitToFlyTimer += Time.deltaTime;
+                }
             }
             else
             {
