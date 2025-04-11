@@ -159,7 +159,7 @@ Shader "Custom/Sand"
             float3 diffuseColor = DiffuseColor (N, L);
             float3 rimColor = RimLighting (N, V);
             float3 oceanColor = OceanSpecular (N, L, V);
-            float3 glitterColor = GlitterSpecular (IN.uv_SandTex, N, L, V);
+            float3 glitterColor = GlitterSpecular (N, N, L, V);
 
             float3 specularColor = saturate(max(rimColor, oceanColor));
             float3 color = diffuseColor + specularColor + glitterColor;

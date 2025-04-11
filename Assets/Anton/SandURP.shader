@@ -95,8 +95,8 @@ Shader "Custom/SandURP"
                 float mipGrad = mipmapLevel(uvParams.xy * uvParams.zw);
                 float mip = floor(mipGrad);
                 float mipLerp = frac(mipGrad);
-                float4 col1 = SAMPLE_TEXTURE2D_LOD(tex, sampler_tex, uvParams.xy / pow(2, mip), mip);
-                float4 col2 = SAMPLE_TEXTURE2D_LOD(tex, sampler_tex, uvParams.xy / (pow(2, mip) * 2), mip);
+                float4 col1 = SAMPLE_TEXTURE2D_LOD(_SandTex, sampler_SandTex, uvParams.xy / pow(2, mip), mip);
+                float4 col2 = SAMPLE_TEXTURE2D_LOD(_SandTex, sampler_SandTex, uvParams.xy / (pow(2, mip) * 2), mip);
                 return lerp(col1, col2, mipLerp);
             }
             // Normalize Lerp Function
@@ -110,7 +110,7 @@ Shader "Custom/SandURP"
             {
                 float2 uv = worldPos.xz * _SandTex_ST.xy;
                 float4 texParams = float4(uv, _SandTex_TexelSize.zw);
-                float3 sandTexSample = tex2Dfold(_SandTex, texParams).rgb;
+                float3 sandTexSample = 1;
                 //float3 sandTexSample = SAMPLE_TEXTURE2D(_SandTex, sampler_SandTex, uv).rgb;
                 
                 float3 S = normalize(sandTexSample * 2 - 1); // Ensure proper normalization

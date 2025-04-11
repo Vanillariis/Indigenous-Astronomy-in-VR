@@ -30,11 +30,13 @@ Shader "Custom/SandURP2"
         _ShallowTex ("Shallow Texture", 2D) = "bump" {}
         _SteepTex ("Steep Texture", 2D) = "bump" {}
         _SteepnessSharpnessPower("Steepness Sharpness Power", Range(0,1)) = 0.1
+        
+        
     }
 
     SubShader
     {
-        Tags { "RenderPipeline"="UniversalRenderPipeline" "RenderType"="Opaque" }
+        Tags { "RenderPipeline"="UniversalRenderPipeline" "RenderType"="Opaque" "TerrainCompatible"="True" }
         Pass
         {
             Name "ForwardLit"
@@ -43,8 +45,11 @@ Shader "Custom/SandURP2"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            //#pragma multi_compile _ LIGHTMAP_ON
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+            
 
             // Texture Samplers
             TEXTURE2D(_MainTex);         SAMPLER(sampler_MainTex);
@@ -92,6 +97,8 @@ Shader "Custom/SandURP2"
                 float3 normalWS : TEXCOORD2;
                 float3 tangentWS : TEXCOORD3;
                 float3 bitangentWS : TEXCOORD4;
+                float2 lightmapUV : TEXCOORD5;
+                float4 shadowCoord : TEXCOORD6;
                 float4 positionCS : SV_POSITION;
             };
 
@@ -104,7 +111,7 @@ Shader "Custom/SandURP2"
             // Sand Normal Mapping
             float3 SandNormal(float3 worldPos, float3 N, float3 tangentWS, float3 bitangentWS)
             {
-                float2 uv = worldPos.xz * _SandTex_ST.xy + _SandTex_ST.zw;
+                float2 uv = worldPos.xz * (_SandTex_ST.xy + _SandTex_ST.zw);
                 float3 sandTexSample = UnpackNormal(SAMPLE_TEXTURE2D(_SandTex, sampler_SandTex, uv)).rgb;
                 
                 float3 S = normalize(sandTexSample * 2 - 1); // Ensure proper normalization
@@ -118,8 +125,8 @@ Shader "Custom/SandURP2"
             {
                 float2 uv = worldPos.xz;
                 //uv = uv * _ShallowTex_ST.xy + _ShallowTex_ST.zw + _SteepTex_ST.xy + _SteepTex_ST.zw;
-                float2 shallowuv = uv * _ShallowTex_ST.xy + _ShallowTex_ST.zw;
-                float2 steepuv = uv * + _SteepTex_ST.xy + _SteepTex_ST.zw;
+                float2 shallowuv = uv * (_ShallowTex_ST.xy + _ShallowTex_ST.zw);
+                float2 steepuv = uv * (_SteepTex_ST.xy + _SteepTex_ST.zw);
 
                 // Sample normal maps using URP-compatible sampling
                 float3 shallow = UnpackNormal(SAMPLE_TEXTURE2D(_ShallowTex, sampler_ShallowTex, shallowuv));
@@ -142,13 +149,20 @@ Shader "Custom/SandURP2"
             // Vertex Shader
             Varyings vert(Attributes IN)
             {
-                Varyings OUT;
+                Varyings OUT = (Varyings)0;;
                 OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS);
                 OUT.tangentWS = TransformObjectToWorldDir(IN.tangentOS.xyz);
                 OUT.bitangentWS = cross(OUT.normalWS, OUT.tangentWS) * IN.tangentOS.w; // Correct bitangent
                 OUT.uv = TRANSFORM_TEX(IN.uv, _SandTex);
+
+                // Lightmap UVs
+                VertexPositionInputs posInputs = GetVertexPositionInputs(IN.positionOS.xyz);
+                VertexNormalInputs normalInputs = GetVertexNormalInputs(IN.normalOS, IN.tangentOS);
+                OUTPUT_LIGHTMAP_UV(IN.uv, unity_LightmapST, OUT.lightmapUV);
+                OUT.shadowCoord = TransformWorldToShadowCoord(OUT.worldPos);
+                
                 return OUT;
             }
 
@@ -184,7 +198,7 @@ Shader "Custom/SandURP2"
             float3 GlitterSpecular(float3 worldPos, float3 N, float3 L, float3 V, float3 tangentWS, float3 bitangentWS)
             {
                 float2 uv = worldPos.xz;
-                uv = uv * _GlitterTex_ST.xy + _GlitterTex_ST.zw;
+                uv = uv * (_GlitterTex_ST.xy + _GlitterTex_ST.zw);
                 
                 float3 G = normalize(SAMPLE_TEXTURE2D(_GlitterTex, sampler_GlitterTex, uv).rgb * 2 - 1);
                 float3 R = reflect(L, G);
@@ -210,7 +224,7 @@ Shader "Custom/SandURP2"
                 float3 specularColor = saturate(max(rimColor, oceanColor));
                 float3 Color = (diffuseColor + specularColor + glitterColor) * lightColor * lightIntensity;
 
-                return float4(Color * _SandColor, 1);
+                return float4(Color * _SandColor.rgb, 1);
             }
 
             // Fragment Shader (Handles Normal Mapping + Lighting)
@@ -267,9 +281,39 @@ Shader "Custom/SandURP2"
                 
                 // Sample the albedo texture (MainTex)
                 float3 albedoColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv).rgb;
-
+                return half4(lightingResult, 1.0);
                 // Multiply the lighting result by the albedo color
-                float3 finalColor = lightingResult * albedoColor;
+                //float3 finalColor = lightingResult * albedoColor;
+
+                // Baked GI
+                InputData inputData;
+                inputData.positionWS = input.worldPos;
+                inputData.normalWS = N;
+                inputData.viewDirectionWS = viewDir;
+                inputData.shadowCoord = input.shadowCoord;
+                inputData.fogCoord = 0;
+                inputData.vertexLighting = 0;
+                inputData.bakedGI = 0; // init to zero
+                inputData.normalizedScreenSpaceUV = 0;
+                inputData.shadowMask = 0;
+
+                //inputData.bakedGI = SampleBakedGI(inputData.normalWS, input.staticLightmapUV);
+                float3 bakedGI = 0;
+
+                #ifdef LIGHTMAP_ON
+                    // Input.lightmapUV should be passed from vertex to fragment shader
+                    float4 lightmapColor = SAMPLE_TEXTURE2D(unity_Lightmap, samplerunity_Lightmap, input.lightmapUV.xy);
+                    bakedGI = DecodeLightmap(lightmapColor);
+                #endif
+
+                // Combine baked GI and dynamic lighting
+                float3 bakedLighting = bakedGI * albedoColor;
+                float3 dynamicLighting = lightingResult * albedoColor;
+                
+                // Final color is the sum of both
+                float3 finalColor = bakedLighting + dynamicLighting;
+
+                //finalColor += inputData.bakedGI;
 
                 return half4(finalColor, 1.0);
             }
@@ -277,5 +321,58 @@ Shader "Custom/SandURP2"
 
             ENDHLSL
         }
+        Pass
+        {
+            Name "META"
+            Tags { "LightMode" = "Meta" }
+
+            Cull Off
+
+            HLSLPROGRAM
+            #pragma vertex UniversalVertexMeta
+            #pragma fragment UniversalFragmentMeta
+            #pragma shader_feature EDITOR_VISUALIZATION
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/MetaInput.hlsl"
+
+            TEXTURE2D(_SandTex);         SAMPLER(sampler_SandTex);
+
+            CBUFFER_START(UnityPerMaterial)
+            float4 _Color;
+            float4 _SandTex_ST;
+            CBUFFER_END
+
+            struct Attributes
+            {
+                float4 positionOS   : POSITION;
+                float2 uv           : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+                float2 uv         : TEXCOORD0;
+            };
+
+            Varyings UniversalVertexMeta(Attributes input)
+            {
+                Varyings output;
+                output.positionCS = TransformWorldToHClip(TransformObjectToWorld(input.positionOS.xyz));
+                output.uv = TRANSFORM_TEX(input.uv, _SandTex);
+                return output;
+            }
+
+            half4 UniversalFragmentMeta(Varyings input) : SV_Target
+            {
+                MetaInput metaInput;
+                float4 albedo = SAMPLE_TEXTURE2D(_SandTex, sampler_SandTex, input.uv) * _Color;
+                metaInput.Albedo = albedo.rgb;
+                metaInput.Emission = 0;
+
+                return MetaFragment(metaInput);
+            }
+            ENDHLSL
+        }
+
     }
 }
