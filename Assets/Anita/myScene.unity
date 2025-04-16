@@ -660,7 +660,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868827560}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cf1c970d6d7c45d9805d87798b8640f, type: 3}
   m_Name: 
@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 1978113226}
   - component: {fileID: 1978113225}
   - component: {fileID: 1978113224}
+  - component: {fileID: 1978113227}
   m_Layer: 0
   m_Name: Line Renderer
   m_TagString: Untagged
@@ -726,7 +727,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978113223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f800a7aabc724923a17e717c3162acf, type: 3}
   m_Name: 
@@ -787,7 +788,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.088607594
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -853,6 +854,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978113227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978113223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e3c67e4b44949c38c196380820cc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineR: {fileID: 1978113225}
+  segments: 30
+  points: []
+  ground: {fileID: 1947151729}
+  kite: {fileID: 1630126693}
+  slackFactor: 10
+  maxLineLength: 3
 --- !u!1 &359312181361106478
 GameObject:
   m_ObjectHideFlags: 0
