@@ -58,11 +58,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Bloom_Intensity: 3
+    - _Bloom_Intensity: 2.3
     - _Depth_Fade_Distance: 4
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothstep_Opacity_In: 0
+    - _Smoothstep_Opacity_In: 0.1
     - _Smoothstep_Opacity_Out: 1
     - _UV_Distorsion_Intensity: -1
     - _UV_Distorsion_Opacity_Intensity: 0.05
