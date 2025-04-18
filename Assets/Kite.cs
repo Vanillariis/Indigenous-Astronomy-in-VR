@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +13,10 @@ public class Kite : MonoBehaviour
     public float Speed;
 
     public GameObject HoistInPoint;
+
+    public List<GameObject> FeathersPlaceHolders;
+    public int FeatherAttacheds;
+    public bool FeatherAttacheded;
 
     [Range(0f, 100f)]
     public int Happiness;
@@ -30,6 +35,11 @@ public class Kite : MonoBehaviour
         if (KiteState == KiteState.HoistOut)
         {
             transform.position = Vector3.MoveTowards(transform.position, PositionTo, Speed);
+
+            if (FeatherAttacheded == true)
+            {
+                FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+            }
         }
 
         if (KiteState == KiteState.HoistIn)
@@ -37,4 +47,35 @@ public class Kite : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, HoistInPoint.transform.position, Speed);
         }
     }
+
+    public void FeatherPlaced()
+    {
+        FeathersPlaceHolders[FeatherAttacheds].SetActive(true);
+
+        FeatherAttacheds += 1;
+
+        FeatherAttacheded = true;
+        
+
+        if (FeatherAttacheds == 1)
+        {
+            Happiness = 100;
+        }
+
+        if (FeatherAttacheds == 2)
+        {
+            Happiness = 70;
+        }
+
+        if (FeatherAttacheds == 3)
+        {
+            Happiness = 40;
+        }
+
+        if (FeatherAttacheds == 4)
+        {
+            Happiness = 100;
+        }
+    }
+
 }

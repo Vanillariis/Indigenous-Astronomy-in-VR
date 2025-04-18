@@ -12,8 +12,8 @@ public class VoicePara
 {
     public AudioClip Audio;
 
-    [TextArea(2, 3)]
-    public List<string> Translation;
+    [TextArea(5, 30)]
+    public string Translation;
 }
 
 
@@ -21,6 +21,7 @@ public class VoiceOver : MonoBehaviour
 {
     public bool Next;
     public bool Auto;
+    public bool ShowText;
     private bool DoneWithPara = true;
     private bool DoneWithTranslation = true;
     private int Para;
@@ -51,22 +52,19 @@ public class VoiceOver : MonoBehaviour
                 AudioSource.clip = VoiceParas[Para].Audio;
                 AudioSource.Play();
 
-                int chars = 0;
-                foreach (var text in VoiceParas[Para].Translation)
+
+                if (ShowText == true)
                 {
-                    chars += text.Length;
+                    TranslationText.gameObject.SetActive(true);
+
+                    float typeSpeed = (VoiceParas[Para].Audio.length / VoiceParas[Para].Translation.Length);
+
+                    StartCoroutine(TypeText(VoiceParas[Para].Translation, typeSpeed));
                 }
-
-                chars -= VoiceParas[Para].Translation.Count;
-
-                float typeSpeed = (VoiceParas[Para].Audio.length / chars) - (2.5f * VoiceParas[Para].Translation.Count) / chars;
-
-                Debug.Log(typeSpeed);
-
-
-
-                StartCoroutine(TypeText(VoiceParas[Para].Translation, typeSpeed));
-
+                else
+                {
+                    TranslationText.gameObject.SetActive(false);
+                }
 
                 Para++;
             }
@@ -81,14 +79,10 @@ public class VoiceOver : MonoBehaviour
     }
 
 
-    IEnumerator TypeText(List<string> translations, float typeSpeed)
+    IEnumerator TypeText(string translations, float typeSpeed)
     {
-        foreach (string text in translations)
-        {
-            TranslationText.text = "";
-            yield return StartCoroutine(TypeChar(text, typeSpeed));
-            yield return new WaitForSeconds(2f); 
-        }
+        TranslationText.text = "";
+        yield return StartCoroutine(TypeChar(translations, typeSpeed));
 
         DoneWithTranslation = true;
     }
@@ -106,12 +100,22 @@ public class VoiceOver : MonoBehaviour
                 adjustedSpeed *= 1.1f; 
             }
 
-            if (char.IsPunctuation(letter))
+            if (letter == ',')
             {
-                adjustedSpeed *= 1.2f;
+                adjustedSpeed *= 1.1f;
+            }
+
+            if (letter == '.')
+            {
+                adjustedSpeed *= 1.4f;
             }
 
             yield return new WaitForSeconds(adjustedSpeed);
+
+            if (letter == '.')
+            {
+                TranslationText.text = "";
+            }
         }
     }
 }

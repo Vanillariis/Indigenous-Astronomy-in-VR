@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class OstrichLogic : MonoBehaviour
 {
@@ -25,8 +27,24 @@ public class OstrichLogic : MonoBehaviour
     public float WaitToFlyTimerMax;
     private float WaitToFlyTimer;
     public GameObject MoveUpTo;
+    public bool ReadyToFlyUp;
     private bool ReadyToFly;
     public float MoveUpSpeed;
+    public bool FeatherHasBeenAttached;
+
+
+    [Header("Gods")]
+    public TwoBoneIKConstraint LightGodHandIK;
+    public TwoBoneIKConstraint DarkGodHandIK;
+
+    public bool LookAtFeather;
+    public bool LookAtKite;
+
+    public List<MultiAimConstraint> LightGodHeadIk;
+    public MultiAimConstraint LightGodHeadLookAtNowIk;
+
+    public List<MultiAimConstraint> DarkGodHeadIk;
+    public MultiAimConstraint DarkGodHeadLookAtNowIk;
 
 
     private void Start()
@@ -34,6 +52,8 @@ public class OstrichLogic : MonoBehaviour
         CastFeatherOnce = true;
 
         Ani = GetComponentInChildren<Animator>();
+
+        FeatherHasBeenAttached = true;
     }
 
 
@@ -56,18 +76,51 @@ public class OstrichLogic : MonoBehaviour
                 _feather.Target = FeatherTarget;
 
                 CastFeatherOnce = true;
+
+                FeatherHasBeenAttached = false;
             }
         }
+
+        // IK heads
+        if (LookAtFeather == true)
+        {
+            LightGodHeadLookAtNowIk = LightGodHeadIk[2];
+            DarkGodHeadLookAtNowIk = DarkGodHeadIk[2];
+        }
+        else if (LookAtKite == true)
+        {
+            LightGodHeadLookAtNowIk = LightGodHeadIk[3];
+            DarkGodHeadLookAtNowIk = DarkGodHeadIk[3];
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, Player.transform.position) < 50)
+            {
+                LightGodHeadLookAtNowIk = LightGodHeadIk[1];
+                DarkGodHeadLookAtNowIk = DarkGodHeadIk[1];
+            }
+            else
+            {
+                LightGodHeadLookAtNowIk = LightGodHeadIk[0];
+                DarkGodHeadLookAtNowIk = DarkGodHeadIk[0];
+            }
+        }
+
+        ChancheHeadIK();
     }
 
     private void FixedUpdate()
     {
         if (ReadyToFly == true)
         {
+            // Reset Pos
             if (Vector3.Distance(transform.position, EndPoint.position) < .01)
             {
-                transform.position = StartPoint.position;
-                CastFeatherOnce = false;
+                if (FeatherHasBeenAttached == true)
+                {
+                    transform.position = StartPoint.position;
+                    CastFeatherOnce = false;
+                }
             }
             else
             {
@@ -76,21 +129,75 @@ public class OstrichLogic : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(new Vector3(0, transform.position.y, 0), new Vector3(0, MoveUpTo.transform.position.y, 0)) < .01)
+            if (ReadyToFlyUp == true)
             {
-                if (WaitToFlyTimer > WaitToFlyTimerMax)
+                if (Ani.GetCurrentAnimatorStateInfo(0).IsName("Armature|TakeOff"))
                 {
-                    ReadyToFly = true;
-                    Ani.SetBool("Fly", true);
+                    if (WaitToFlyTimer > WaitToFlyTimerMax)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, new Vector3(EndPoint.position.x, EndPoint.position.y * 2.5f, EndPoint.position.z), Speed);
+                    }
+                    else
+                    {
+                        WaitToFlyTimer += Time.deltaTime;
+                    }
                 }
-                else
+
+                if (Ani.GetCurrentAnimatorStateInfo(0).IsName("Armature|Flying"))
                 {
-                    WaitToFlyTimer += Time.deltaTime;
+                    ReadyToFlyUp = false;
+                    ReadyToFly = true;
+                    Debug.Log("flying normal");
                 }
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, MoveUpTo.transform.position.y, transform.position.z), MoveUpSpeed);
+                if (Vector3.Distance(new Vector3(0, transform.position.y, 0), new Vector3(0, MoveUpTo.transform.position.y, 0)) < .01)
+                {
+                    LightGodHandIK.weight -= Time.deltaTime / 3;
+                    DarkGodHandIK.weight -= Time.deltaTime / 3;
+
+                    if (WaitToFlyTimer > WaitToFlyTimerMax - .5)
+                    {
+                        Ani.SetBool("Fly", true);
+                        ReadyToFlyUp = true;
+                    }
+                    else
+                    {
+                        WaitToFlyTimer += Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, MoveUpTo.transform.position.y, transform.position.z), MoveUpSpeed);
+                }
+            }
+        }
+    }
+
+    public void ChancheHeadIK()
+    {
+        foreach (var item in LightGodHeadIk)
+        {
+            if (item != LightGodHeadLookAtNowIk)
+            {
+                item.weight -= Time.deltaTime / 3;
+            }
+            else
+            {
+                item.weight += Time.deltaTime / 3;
+            }
+        }
+
+        foreach (var item in DarkGodHeadIk)
+        {
+            if (item != DarkGodHeadLookAtNowIk)
+            {
+                item.weight -= Time.deltaTime / 3;
+            }
+            else
+            {
+                item.weight += Time.deltaTime / 3;
             }
         }
     }
