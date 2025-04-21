@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BandMask:
-        m_Texture: {fileID: 2800000, guid: a34f51da248f06844a79ab877df589a9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -74,7 +74,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MilkyWayTex:
-        m_Texture: {fileID: 2800000, guid: 18fee49115076b145a53bc18367e0ebd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 18ec2d52be8f4524a97c25a2ed27838e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -130,6 +130,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Intensity: 1
+    - _MWBlendEnd: 0.733
+    - _MWBlendStart: 0.212
+    - _MWIntensity: 1.47
     - _Metallic: 0
     - _MilkyWayBoost: -21.5
     - _MilkyWayBrightness: 2.23

@@ -12,6 +12,11 @@ Shader "Custom/Starfield"
         _PoleColorTop("Top Pole Color", Color) = (1, 1, 1, 1)
         _PoleColorBottom("Bottom Pole Color", Color) = (0, 0, 1, 1)
         _PoleFadeSharpness("Pole Edge Falloff", Range(0.01, 2.0)) = 0.3
+        
+        _MilkyWayTex("Milky Way Texture", 2D) = "black" {}
+        _MWIntensity("Milky Way Intensity", Float) = 1.0
+        _MWBlendStart("Milky Way Blend Start", Range(0, 1)) = 0.2
+        _MWBlendEnd("Milky Way Blend End", Range(0, 1)) = 0.8
     }
 
     SubShader
@@ -44,6 +49,12 @@ Shader "Custom/Starfield"
 
             TEXTURE2D(_BandMask);   SAMPLER(sampler_BandMask);
             TEXTURE2D(_NoiseTex);   SAMPLER(sampler_NoiseTex);
+
+            
+            TEXTURE2D(_MilkyWayTex); SAMPLER(sampler_MilkyWayTex);
+            float _MWIntensity;
+            float _MWBlendStart;
+            float _MWBlendEnd;
 
             struct appdata
             {
@@ -164,26 +175,32 @@ Shader "Custom/Starfield"
                 float3 col = float3(0, 0, 0);
                 [unroll]
 
-                float mask = SAMPLE_TEXTURE2D(_BandMask, sampler_BandMask, uv).r;
+                //float mask = SAMPLE_TEXTURE2D(_BandMask, sampler_BandMask, uv).r;
 
-                // Add dusty edge using noise and mask
-                float2 dustUV = uv * _DustTiling;
-                float dust = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, dustUV).r;
-                float edgeFade = smoothstep(0.0, 0.6, 1.0 - mask);
+                // Blend the Milky Way into black
+                //float milkyFade = smoothstep(_MWBlendStart, _MWBlendEnd, mask);
+
+                // Sample the Milky Way texture
+                float3 milkyCol = SAMPLE_TEXTURE2D(_MilkyWayTex, sampler_MilkyWayTex, uv).rgb;
+                //milkyCol *= _MWIntensity * milkyFade;
                 //col += dust * edgeFade * _DustIntensity;
 
                 //col *= mask;
-                
+                float3 starCol = float3(0, 0, 0);
                 for (int j = 0; j < 8; j++)
                 {
                     float i_f = j / 4.0;
                     float depth = frac(i_f );
                     float scale = lerp(20.0, 0.5, depth);
                     float fade = depth * smoothstep(1.0, 0.9, depth);
-                    col += StarLayer(uv * scale + i_f * 453.2, t) * fade;
+                    starCol += StarLayer(uv * scale + i_f * 453.2, t) * fade;
                 }
 
-                
+                // Optionally reduce stars where the Milky Way is strong
+                //float starFade = 1.0 - mask;
+                //starCol *= starFade;
+
+                col = milkyCol + starCol;
                 
                 col = pow(col * _Intensity, float3(0.4545, 0.4545, 0.4545));
 
