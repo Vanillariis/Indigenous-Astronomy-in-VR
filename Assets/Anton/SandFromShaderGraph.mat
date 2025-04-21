@@ -124,7 +124,7 @@ Material:
     - _DuneDirectionY: 2.69
     - _EnvironmentReflections: 1
     - _GlitterIntensity: 0.34
-    - _GlitterThreshold: 0.5
+    - _GlitterThreshold: 0.6
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

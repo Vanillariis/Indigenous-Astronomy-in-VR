@@ -76,7 +76,7 @@ Material:
     - _MilkyWayTex:
         m_Texture: {fileID: 2800000, guid: 18ec2d52be8f4524a97c25a2ed27838e, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0.39, y: 0.48}
     - _NoiseTex:
         m_Texture: {fileID: 2800000, guid: 18fee49115076b145a53bc18367e0ebd, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -130,9 +130,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Intensity: 1
-    - _MWBlendEnd: 0.733
-    - _MWBlendStart: 0.212
-    - _MWIntensity: 1.47
+    - _MWBlendEnd: 0.14
+    - _MWBlendStart: 0
+    - _MWIntensity: 0.06
     - _Metallic: 0
     - _MilkyWayBoost: -21.5
     - _MilkyWayBrightness: 2.23
@@ -166,7 +166,7 @@ Material:
     - _MilkyWayDir: {r: -4.4, g: 0, b: 79.3, a: 0}
     - _MilkyWayDirection: {r: 0, g: 1, b: 0, a: 0}
     - _MilkyWayDustColor: {r: 0.735849, g: 0.66425264, b: 0.5310609, a: 1}
-    - _PoleColorBottom: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 1}
+    - _PoleColorBottom: {r: 0, g: 0, b: 0, a: 1}
     - _PoleColorTop: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

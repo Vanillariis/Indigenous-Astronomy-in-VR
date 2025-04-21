@@ -55,6 +55,7 @@ Shader "Custom/Starfield"
             float _MWIntensity;
             float _MWBlendStart;
             float _MWBlendEnd;
+            float4 _MilkyWayTex_ST;
 
             struct appdata
             {
@@ -165,8 +166,8 @@ Shader "Custom/Starfield"
             half4 frag (v2f i) : SV_Target
             {
                 float3 dir = normalize(i.normal);
-                float2 uv = OctahedralWrap(dir);
-                uv = dir.xz * 4.;
+                float2 Milkyuv = OctahedralWrap(dir);
+                float2 uv = dir.xz * 4.;
                 //float2 uv = dir.xy * 2.;
 
                 float t = _Time * 4.;
@@ -175,14 +176,15 @@ Shader "Custom/Starfield"
                 float3 col = float3(0, 0, 0);
                 [unroll]
 
-                //float mask = SAMPLE_TEXTURE2D(_BandMask, sampler_BandMask, uv).r;
-
+                // Use direction to determine vertical position
+                float bandValue = abs(dir.z); // 0 at equator, 1 at poles
                 // Blend the Milky Way into black
-                //float milkyFade = smoothstep(_MWBlendStart, _MWBlendEnd, mask);
+                float bandMask = smoothstep(_MWBlendEnd, _MWBlendStart, bandValue); 
 
                 // Sample the Milky Way texture
-                float3 milkyCol = SAMPLE_TEXTURE2D(_MilkyWayTex, sampler_MilkyWayTex, uv).rgb;
-                //milkyCol *= _MWIntensity * milkyFade;
+                Milkyuv = dir.xz * _MilkyWayTex_ST.xy + _MilkyWayTex_ST.zw;
+                float3 milkyCol = SAMPLE_TEXTURE2D(_MilkyWayTex, sampler_MilkyWayTex, Milkyuv).rgb;
+                milkyCol *= _MWIntensity * bandMask;
                 //col += dust * edgeFade * _DustIntensity;
 
                 //col *= mask;
@@ -200,9 +202,10 @@ Shader "Custom/Starfield"
                 //float starFade = 1.0 - mask;
                 //starCol *= starFade;
 
-                col = milkyCol + starCol;
+                col += milkyCol;
+                col += starCol;
                 
-                col = pow(col * _Intensity, float3(0.4545, 0.4545, 0.4545));
+                col += pow(col * _Intensity, float3(0.4545, 0.4545, 0.4545));
 
                 // Compute vertical direction (normalized -1 to 1)
                 float v = dir.y; // -1 = bottom, 0 = equator, 1 = top
