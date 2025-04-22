@@ -58,14 +58,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Bloom_Intensity: 2.3
-    - _Depth_Fade_Distance: 4
+    - _Bloom_Intensity: 14
+    - _Depth_Fade_Distance: 8
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothstep_Opacity_In: 0.1
+    - _Smoothstep_Opacity_In: 0
     - _Smoothstep_Opacity_Out: 1
-    - _UV_Distorsion_Intensity: -1
-    - _UV_Distorsion_Opacity_Intensity: 0.05
+    - _UV_Distorsion_Intensity: -0.5
+    - _UV_Distorsion_Opacity_Intensity: -0.09
     m_Colors:
     - _Noise_1_Tiling_and_Panner_Speed: {r: 1, g: 1, b: 0, a: -1}
     - _Noise_2_Tiling_and_Panner_Speed: {r: 1, g: 1, b: 0, a: -1}

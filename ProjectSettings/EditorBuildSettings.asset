@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
   - enabled: 0
-    path: Assets/Vanilla/XR_VRsetup.unity
+    path: Assets/Vanilla/VRsetup.unity
     guid: a26c6918ad41343c7a2a538dbb80bce7
   - enabled: 1
     path: Assets/Vanilla/Meta_VRsetup.unity
