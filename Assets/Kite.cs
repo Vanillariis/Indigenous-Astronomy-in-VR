@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +19,8 @@ public class Kite : MonoBehaviour
     public int FeatherAttacheds;
     public bool FeatherAttacheded;
 
+    public KiteLine KiteLine; 
+
     [Range(0f, 100f)]
     public int Happiness;
 
@@ -34,6 +37,7 @@ public class Kite : MonoBehaviour
 
         if (KiteState == KiteState.HoistOut)
         {
+           
             transform.position = Vector3.MoveTowards(transform.position, PositionTo, Speed);
 
             if (FeatherAttacheded == true)

@@ -26,6 +26,8 @@ public class VoiceOver : MonoBehaviour
     private bool DoneWithTranslation = true;
     private int Para;
 
+    public GameObject OstrichPare;
+
     public List<VoicePara> VoiceParas;
     public AudioSource AudioSource;
     public TMP_Text TranslationText;
@@ -52,6 +54,10 @@ public class VoiceOver : MonoBehaviour
                 AudioSource.clip = VoiceParas[Para].Audio;
                 AudioSource.Play();
 
+                if (Para == 3)
+                {
+                    OstrichPare.SetActive(true);
+                }
 
                 if (ShowText == true)
                 {

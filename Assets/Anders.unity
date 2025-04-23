@@ -5404,6 +5404,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -115320854971759993, guid: db135ea8265124e509984bf55d0ae955, type: 3}
   m_PrefabInstance: {fileID: 1884594818}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &310560512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+  m_PrefabInstance: {fileID: 1578554739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &324002315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3593049300129831922, guid: db135ea8265124e509984bf55d0ae955, type: 3}
@@ -10762,7 +10767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.154
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10770,23 +10775,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.542
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.132144
+      value: 0.1864503
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3986291
+      value: -0.026075711
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.15585199
+      value: 0.08359558
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.89405984
+      value: 0.9785541
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10794,7 +10799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 49.958
+      value: -1.155
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -11145,63 +11150,70 @@ MonoBehaviour:
   Next: 1
   Auto: 1
   ShowText: 0
+  OstrichPare: {fileID: 1656370158}
   VoiceParas:
   - Audio: {fileID: 8300000, guid: 7622a16e3db0ea2488d41737cd6cf2bc, type: 3}
-    Translation: 'Legend goes that before night and day were ever formed, there existed
+    Translation: Legend goes that before night and day were ever formed, there existed
       a God of Light, a force for good, and his cosmic counterpart, a god of the
       Dark, a force for bad. The two existed in isolation, and balance, until they
       decided to play a game, one that would be eternal and infinite, until a winner
-      emerged. '
+      emerged.
   - Audio: {fileID: 8300000, guid: 350e0e87cb047ba448c16cbcc61e4810, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
+    Translation: They sat at the peak of the highest dunes of the biggest desert
       in Africa, and embarked on a game called the kite game. It involved betting
       of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+      the scales of judgement.
   - Audio: {fileID: 8300000, guid: 3912337ae062333478a3c0851f855448, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: 'The two would embark on the creation of a world, a fruitful but
+      unlit paradise, and allow one living entity to inhabit it, armed with only
+      the most ancient of emotions: hope and love one the one hand, and fear and
+      doubt on the other.'
   - Audio: {fileID: 8300000, guid: 28a2ef9a0f7897e49afd12435017470d, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: "Two Gods created one lone creature to start the wager, a bird who
+      would fly through the emptiness, blindly, learning the layout of the land by
+      pure instinct and not sight. This bird, an ostrich with soaring wings that
+      enabled it to fly, was the first of its kind, and mankind\u2019s fate lay in
+      its hands."
   - Audio: {fileID: 8300000, guid: e9905950d96ccea4e936a70aebb20190, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: "Each day, the sightless ostrich made one rotation around the dark
+      earth, and each night a single feather was shed. The two Gods solemnly collected
+      each feather, and each day tied it to a kite that judged the giant bird\u2019s
+      character. The kite would swing up with hope, or shrink low with fear, depending
+      on the bird\u2019s good or bad intentions and thoughts. As weeks stretched
+      into months, the ostrich lost hope, and the kite and feather drifted lower
+      and lower as the ostrich began to understand that it alone inhabited the dark
+      and unlit world."
   - Audio: {fileID: 8300000, guid: 343c1329fe146114d8a979b18a8e1dab, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: "After many years, the bird was so burdened with loneliness that
+      soon his kite-attached feathers hovered barely above the unlit ground, all
+      but empty of hope and love for itself. But every now and then, as the ostrich
+      glided through the empty expanse surrounding the nascent earth, the lonely
+      bird would cast its eyes to the light from the sand dunes, where the two God\u2019s
+      waited patiently for the daily reckoning."
   - Audio: {fileID: 8300000, guid: a967907fc4f62044884177cc1225b97f, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: Soon, the lonely bird looked forward to seeing the light, and the
+      reminder that he was of the light and was destined to return to it. Years passed,
+      and the ostrich grew older and wearier. His journeys around the silent earth,
+      though alone, were filled with a hope for a world filled with others lifeforms,
+      love and light, and this hope tingled in every inch of his wings.
   - Audio: {fileID: 8300000, guid: 789b94ec43cb664458b6be75885a3486, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: When the elderly ostrich finally reach his last flight, the two
+      Gods took the last of his luscious tail feathers, tied it to the last kite
+      and let it go.
   - Audio: {fileID: 8300000, guid: efef71bc82a6ffc499c979ae353ea6fe, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: Buoyed by the love and hope that the first ostrich had imbued in
+      the feather, the kite soared off into the empty sky, soon followed by the ostrich
+      in a flush of stars, settling into their place as the Moon and the stars and
+      shedding light on the earth for the first time. Now the wager was complete,
   - Audio: {fileID: 8300000, guid: 4e3962ab59a50644f9fe6b8e8ea69335, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: The Gods of Good and Bad retreated to create the rest of the universe,
+      weaving stars amongst planets, and littering the world with wondrous animals,
+      plant life and ancient people that we see remnants of today.
   - Audio: {fileID: 8300000, guid: d30f377b3c210ee4998a8fab52583293, type: 3}
-    Translation: 'They sat at the peak of the highest dunes of the biggest desert
-      in Africa, and embarked on a game called the kite game. It involved betting
-      of how long a new being, an entity of mutual creation, would do if placed on
-      the scales of judgement. '
+    Translation: "Soon the Ostrich was one of many constellations, and his story
+      was long-forgotten by the ancestors of the first men. But his quest for a soul
+      family was complete as he lies among his kind, and the Ju\\\u2019Hoansi tell
+      of his brave search for love and hope in the story of the ostrich in the sky."
   AudioSource: {fileID: 634156795}
   TranslationText: {fileID: 1299931119}
 --- !u!4 &634156797
@@ -11356,7 +11368,7 @@ MonoBehaviour:
   segments: 30
   points: []
   ground: {fileID: 1970418519}
-  kite: {fileID: 949152026}
+  kite: {fileID: 310560512}
   slackFactor: 3
   maxLineLength: 3
 --- !u!114 &685270907
@@ -11395,7 +11407,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d87f132a0aa64e7b980c3763f37b1bd, type: 2}
+  - {fileID: 2100000, guid: 8933ec5769faa42e0b5b89e9099e8160, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16646,6 +16658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949152026}
   - component: {fileID: 949152025}
+  - component: {fileID: 949152027}
   m_Layer: 0
   m_Name: Kite Place Holder
   m_TagString: Untagged
@@ -16687,14 +16700,35 @@ Transform:
   m_GameObject: {fileID: 949152024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 495.09, y: 125.12, z: 477.98}
+  m_LocalPosition: {x: 497.89, y: 119.22, z: 474.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1903295403}
-  - {fileID: 1858551004}
+  - {fileID: 310560512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &949152027
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949152024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29a97b94806acd04f90123e632ec66d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1009865398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1178621839100504148, guid: db135ea8265124e509984bf55d0ae955, type: 3}
@@ -16732,7 +16766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.236
+      value: -0.51568604
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16740,23 +16774,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.244
+      value: -0.37963867
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.14584327
+      value: 0.14529866
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.23310177
+      value: -0.28968453
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.004860173
+      value: -0.013496972
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9614415
+      value: 0.94593287
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16764,7 +16798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -26.771
+      value: -33.567
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -17260,7 +17294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.021
+      value: -0.142
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17268,7 +17302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.55
+      value: -0.686
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17535,7 +17569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 58145468}
     m_Mid: {fileID: 1538371378}
@@ -18018,6 +18052,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -6392237331848584454, guid: db135ea8265124e509984bf55d0ae955, type: 3}
   m_PrefabInstance: {fileID: 863665862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1578554739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 949152026}
+    m_Modifications:
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323124813097477340, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      propertyPath: m_Name
+      value: KiteRound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4797557895943061094, guid: 959242213a5da4210958f3db804beb14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1858551004}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 959242213a5da4210958f3db804beb14, type: 3}
 --- !u!1 &1605778431
 GameObject:
   m_ObjectHideFlags: 0
@@ -18156,12 +18250,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1656370159}
   m_Layer: 0
-  m_Name: "----\xD8stri-----"
+  m_Name: "----\xD8stri Para-----"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1656370159
 Transform:
   m_ObjectHideFlags: 0
@@ -18232,7 +18326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 1627892245}
     m_SourceObjects:
@@ -18296,31 +18390,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.31
+      value: -0.489
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75135803
+      value: -0.7480011
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.19
+      value: 0.485
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.176795
+      value: 0.1650444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.07536171
+      value: 0.17755623
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.10244718
+      value: 0.12046691
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9759963
+      value: 0.96266395
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18328,7 +18422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 10.728
+      value: 22.798
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aa4f57c2a954d93b68038c67270ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -18489,7 +18583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858551003}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18498,7 +18592,7 @@ Transform:
   - {fileID: 1981803438}
   - {fileID: 1650241637}
   - {fileID: 2130104212}
-  m_Father: {fileID: 949152026}
+  m_Father: {fileID: 310560512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1884594818
 PrefabInstance:
@@ -18719,80 +18813,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1656370159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1903295402
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 949152026}
-    m_Modifications:
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4531581046406191960, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_Name
-      value: Kite
-      objectReference: {fileID: 0}
-    - target: {fileID: 6994111448855112314, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6994111448855112314, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 68.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 6994111448855112314, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7894
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
---- !u!4 &1903295403 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3866542999724835298, guid: 5e94a85cfa83349a49db49f4ce3a8c40, type: 3}
-  m_PrefabInstance: {fileID: 1903295402}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1904887370
 GameObject:
   m_ObjectHideFlags: 0
@@ -18853,7 +18873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 1
   m_Data:
     m_ConstrainedObject: {fileID: 1627892245}
     m_SourceObjects:

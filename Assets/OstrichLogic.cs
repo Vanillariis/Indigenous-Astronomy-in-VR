@@ -101,8 +101,8 @@ public class OstrichLogic : MonoBehaviour
             }
             else
             {
-                LightGodHeadLookAtNowIk = LightGodHeadIk[0];
-                DarkGodHeadLookAtNowIk = DarkGodHeadIk[0];
+                LightGodHeadLookAtNowIk = null;
+                DarkGodHeadLookAtNowIk = null;
             }
         }
 
@@ -169,6 +169,9 @@ public class OstrichLogic : MonoBehaviour
                 }
                 else
                 {
+                    LightGodHandIK.weight += Time.deltaTime / 3;
+                    DarkGodHandIK.weight += Time.deltaTime / 3;
+
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, MoveUpTo.transform.position.y, transform.position.z), MoveUpSpeed);
                 }
             }
