@@ -19,10 +19,16 @@ public class Kite : MonoBehaviour
     public int FeatherAttacheds;
     public bool FeatherAttacheded;
 
-    public KiteLine KiteLine; 
-
     [Range(0f, 100f)]
     public int Happiness;
+
+    [Header("End Scene")]
+    public bool EndScene;
+    public GameObject EndPoint;
+    public OstrichLogic OstrichLogic;
+    public KiteLine kiteLine;
+    public SkyBoxSequenceController SkyBoxSequenceController;
+    public StarBurstRenderer StarBurstRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,22 +39,52 @@ public class Kite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PositionTo = new Vector3(StartPos.x + ((100 - Happiness) * 0.1f), StartPos.y - ((100 - Happiness) * 0.1f), StartPos.z - ((100 - Happiness) * 0.1f));
 
-        if (KiteState == KiteState.HoistOut)
+    }
+
+    private void FixedUpdate()
+    {
+        if (EndScene == true && OstrichLogic.ReadyForEnd == true && Vector3.Distance(transform.position, OstrichLogic.transform.position) < 30)
         {
-           
-            transform.position = Vector3.MoveTowards(transform.position, PositionTo, Speed);
+            OstrichLogic.LookAtBird = true;
 
-            if (FeatherAttacheded == true)
+            OstrichLogic.transform.LookAt(transform, Vector3.up);
+
+            Speed = OstrichLogic.Speed;
+
+            if (Vector3.Distance(transform.position, EndPoint.transform.position) < 0.1)
             {
-                FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+                SkyBoxSequenceController.Explode();
+                StarBurstRenderer.Explode();
+
+                Destroy(OstrichLogic.gameObject);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed);
+                kiteLine.ground = HoistInPoint.transform;
             }
         }
-
-        if (KiteState == KiteState.HoistIn)
+        else
         {
-            transform.position = Vector3.MoveTowards(transform.position, HoistInPoint.transform.position, Speed);
+            PositionTo = new Vector3(StartPos.x + ((100 - Happiness) * 0.1f), StartPos.y - ((100 - Happiness) * 0.1f), StartPos.z - ((100 - Happiness) * 0.1f));
+
+            if (KiteState == KiteState.HoistOut)
+            {
+
+                transform.position = Vector3.MoveTowards(transform.position, PositionTo, Speed);
+
+                if (FeatherAttacheded == true)
+                {
+                    FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+                }
+            }
+
+            if (KiteState == KiteState.HoistIn)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, HoistInPoint.transform.position, Speed);
+            }
         }
     }
 
@@ -80,6 +116,8 @@ public class Kite : MonoBehaviour
         {
             Happiness = 100;
         }
+
+        KiteState = KiteState.HoistOut;
     }
 
 }

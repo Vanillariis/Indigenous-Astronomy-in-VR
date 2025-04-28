@@ -59,6 +59,11 @@ public class VoiceOver : MonoBehaviour
                     OstrichPare.SetActive(true);
                 }
 
+                if (Para == 0) //7
+                {
+                    FindAnyObjectByType<Kite>().EndScene = true;
+                }
+
                 if (ShowText == true)
                 {
                     TranslationText.gameObject.SetActive(true);

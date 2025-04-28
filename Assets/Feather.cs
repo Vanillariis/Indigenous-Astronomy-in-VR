@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using UnityEngine;
 
 public class Feather : MonoBehaviour
@@ -11,8 +12,9 @@ public class Feather : MonoBehaviour
     public Kite Kite;
     OstrichLogic OL;
 
+    public Grabbable grabbable;
+
     public bool Still;
-    public bool PickedUp;
 
     private void Start()
     {
@@ -51,10 +53,16 @@ public class Feather : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (PickedUp == true)
+        if (grabbable.HasBeenGrabed == true)
         {
+            Kite.KiteState = KiteState.HoistIn;
             OL.LookAtFeather = false;
             OL.LookAtKite = true;
+        }
+        else
+        {
+            OL.LookAtFeather = true;
+            OL.LookAtKite = false;
         }
     }
 }

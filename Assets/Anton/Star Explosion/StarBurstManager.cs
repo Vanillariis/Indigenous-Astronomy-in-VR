@@ -11,6 +11,7 @@ public class StarBurstRenderer : MonoBehaviour
     [SerializeField] float baseSize = 0.2f;
     [SerializeField] private IcosphereGenerator skyBox;
     [SerializeField] float speed = 5f; // How fast the stars move outward
+    public bool doit;
 
     struct StarData
     {
@@ -26,6 +27,11 @@ public class StarBurstRenderer : MonoBehaviour
     Bounds renderBounds;
 
     void Start()
+    {
+        
+    }
+
+    public void Explode()
     {
         kernelID = computeShader.FindKernel("CSMain");
 
@@ -61,30 +67,34 @@ public class StarBurstRenderer : MonoBehaviour
 
         // Set large bounds for procedural rendering
         renderBounds = new Bounds(transform.position + Vector3.up * 50f, Vector3.one * 200f);
-    }
 
+        doit = true;
+    }
 
     void Update()
     {
-        float deltaTime = Time.deltaTime;
-        float currentTime = Time.time;
-        Vector3 origin = transform.position;
+        if (doit == true)
+        {
+            float deltaTime = Time.deltaTime;
+            float currentTime = Time.time;
+            Vector3 origin = transform.position;
 
-        computeShader.SetFloat("deltaTime", deltaTime);
-        computeShader.SetFloat("swirlStrength", swirlStrength);
-        computeShader.SetVector("origin", origin);
-        computeShader.SetFloat("currentTime", currentTime);
+            computeShader.SetFloat("deltaTime", deltaTime);
+            computeShader.SetFloat("swirlStrength", swirlStrength);
+            computeShader.SetVector("origin", origin);
+            computeShader.SetFloat("currentTime", currentTime);
 
-        computeShader.Dispatch(kernelID, Mathf.CeilToInt(starCount / 64f), 1, 1);
+            computeShader.Dispatch(kernelID, Mathf.CeilToInt(starCount / 64f), 1, 1);
 
-        starMaterial.SetBuffer("_StarBuffer", starBuffer);
-        starMaterial.SetFloat("_TimeNow", currentTime);
-        starMaterial.SetFloat("_BaseSize", baseSize);
-        starMaterial.SetVector("_Origin", origin);
-        
-        //renderBounds.center = transform.position;
+            starMaterial.SetBuffer("_StarBuffer", starBuffer);
+            starMaterial.SetFloat("_TimeNow", currentTime);
+            starMaterial.SetFloat("_BaseSize", baseSize);
+            starMaterial.SetVector("_Origin", origin);
 
-        Graphics.DrawMeshInstancedProcedural(starMesh, 0, starMaterial, renderBounds, starCount);
+            //renderBounds.center = transform.position;
+
+            Graphics.DrawMeshInstancedProcedural(starMesh, 0, starMaterial, renderBounds, starCount);
+        }
     }
 
     void OnDestroy()

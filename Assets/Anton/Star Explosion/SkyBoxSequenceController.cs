@@ -26,10 +26,46 @@ public class SkyBoxSequenceController : MonoBehaviour
     private bool fadeStarted = false;
     private float fadeStartTime;
 
+    private bool Doit;
+
     void Start()
     {
+        starfieldSkyboxMaterial.SetFloat("_Fade", 0);
+    }
+
+    void Update()
+    {
+        if (Doit == true)
+        {
+
+            timer += Time.deltaTime;
+
+            if (!explosionTriggered && timer >= explosionDelay)
+            {
+                if (starExplosion != null)
+                    starExplosion.SetActive(true);
+                explosionTriggered = true;
+            }
+
+            if (!fadeStarted && timer >= skyboxFadeDelay)
+            {
+                fadeStarted = true;
+                fadeStartTime = Time.time;
+            }
+
+            if (fadeStarted && starfieldSkyboxMaterial != null)
+            {
+                float t = (Time.time - fadeStartTime) / skyboxFadeDuration;
+                float intensity = Mathf.Lerp(0f, maxSkyboxIntensity, t);
+                starfieldSkyboxMaterial.SetFloat("_Fade", intensity);
+            }
+        }
+    }
+
+    public void Explode()
+    {
         // Spawn and configure moon
-        moonInstance = Instantiate(moonPrefab, moonStartPosition, Quaternion.identity);
+        moonInstance = Instantiate(moonPrefab, transform.position, Quaternion.identity);
         var moonMove = moonInstance.GetComponent<MoonMove>();
         moonMove.enabled = false; // temporarily disable so we can set values
         moonMove.target = moonTarget;
@@ -41,30 +77,8 @@ public class SkyBoxSequenceController : MonoBehaviour
         // Set initial skybox intensity
         if (starfieldSkyboxMaterial != null)
             starfieldSkyboxMaterial.SetFloat("_Fade", 0f);
-    }
 
-    void Update()
-    {
-        timer += Time.deltaTime;
 
-        if (!explosionTriggered && timer >= explosionDelay)
-        {
-            if (starExplosion != null)
-                starExplosion.SetActive(true);
-            explosionTriggered = true;
-        }
-
-        if (!fadeStarted && timer >= skyboxFadeDelay)
-        {
-            fadeStarted = true;
-            fadeStartTime = Time.time;
-        }
-
-        if (fadeStarted && starfieldSkyboxMaterial != null)
-        {
-            float t = (Time.time - fadeStartTime) / skyboxFadeDuration;
-            float intensity = Mathf.Lerp(0f, maxSkyboxIntensity, t);
-            starfieldSkyboxMaterial.SetFloat("_Fade", intensity);
-        }
+        Doit = true;
     }
 }

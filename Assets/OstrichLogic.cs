@@ -39,12 +39,17 @@ public class OstrichLogic : MonoBehaviour
 
     public bool LookAtFeather;
     public bool LookAtKite;
+    public bool LookAtBird;
 
     public List<MultiAimConstraint> LightGodHeadIk;
     public MultiAimConstraint LightGodHeadLookAtNowIk;
 
     public List<MultiAimConstraint> DarkGodHeadIk;
     public MultiAimConstraint DarkGodHeadLookAtNowIk;
+
+    [Header("End Scene")]
+    public Kite Kite;
+    public bool ReadyForEnd;
 
 
     private void Start()
@@ -82,7 +87,12 @@ public class OstrichLogic : MonoBehaviour
         }
 
         // IK heads
-        if (LookAtFeather == true)
+        if (LookAtBird == true)
+        {
+            LightGodHeadLookAtNowIk = LightGodHeadIk[1];
+            DarkGodHeadLookAtNowIk = DarkGodHeadIk[1];
+        }
+        else if (LookAtFeather == true)
         {
             LightGodHeadLookAtNowIk = LightGodHeadIk[2];
             DarkGodHeadLookAtNowIk = DarkGodHeadIk[2];
@@ -120,11 +130,23 @@ public class OstrichLogic : MonoBehaviour
                 {
                     transform.position = StartPoint.position;
                     CastFeatherOnce = false;
+
+                    if (Kite.EndScene == true)
+                    {
+                        ReadyForEnd = true;
+                    }
                 }
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, EndPoint.position, Speed);
+                if (ReadyForEnd == true)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, Kite.transform.position, Speed);
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, EndPoint.position, Speed);
+                }
             }
         }
         else
