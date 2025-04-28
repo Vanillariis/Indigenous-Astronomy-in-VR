@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class IcosphereGenerator : MonoBehaviour
 {
     [Range(0, 5)]
-    public int subdivisions = 3;
-    public float radius = 10f;
+    public int subdivisions = 1;
+    public float radius = 1f;
 
     private static readonly float t = (1f + Mathf.Sqrt(5f)) / 2f;
 

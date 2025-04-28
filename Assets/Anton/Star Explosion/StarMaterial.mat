@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-461132424534994460
+--- !u!114 &-3226286452117624910
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StarfieldMatTest
-  m_Shader: {fileID: 4800000, guid: 3f553b8fa73b1aa43b7af8e5cc22afde, type: 3}
+  m_Name: StarMaterial
+  m_Shader: {fileID: 4800000, guid: e63488e8aeb88f541810455c3d32dbe0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -37,10 +37,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BandMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -73,14 +69,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MilkyWayTex:
-        m_Texture: {fileID: 2800000, guid: 18ec2d52be8f4524a97c25a2ed27838e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.39, y: 0.48}
-    - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 18fee49115076b145a53bc18367e0ebd, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -110,43 +98,25 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BaseSize: 8
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _CustomTime: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _DustIntensity: 1.74
-    - _DustTiling: 6.42
     - _EnvironmentReflections: 1
-    - _Fade: 0.36736113
-    - _Flare: 0.6
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: 1
-    - _MWBlendEnd: 0.14
-    - _MWBlendStart: 0
-    - _MWIntensity: 0.06
     - _Metallic: 0
-    - _MilkyWayBoost: -21.5
-    - _MilkyWayBrightness: 2.23
-    - _MilkyWayCurve: 1.05
-    - _MilkyWayFalloff: 6.32
-    - _MilkyWayIntensity: 1
-    - _MilkyWayLength: 1.16
-    - _MilkyWaySharpness: 12.6
-    - _MilkyWayTaper: 5.54
-    - _MilkyWayWidth: 0.27
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PoleFadeSharpness: 0.96
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -154,8 +124,6 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StarFalloffEnd: 40.15
-    - _StarFalloffStart: 0.25
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
@@ -163,12 +131,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MilkyWayCoreColor: {r: 1, g: 0.58642024, b: 0, a: 1}
-    - _MilkyWayDir: {r: -4.4, g: 0, b: 79.3, a: 0}
-    - _MilkyWayDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _MilkyWayDustColor: {r: 0.735849, g: 0.66425264, b: 0.5310609, a: 1}
-    - _PoleColorBottom: {r: 0, g: 0, b: 0, a: 1}
-    - _PoleColorTop: {r: 1, g: 1, b: 1, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

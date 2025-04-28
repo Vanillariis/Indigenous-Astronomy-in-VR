@@ -3537,6 +3537,21 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "0aab67c1f63d4d3b9f4448ca7f39abc7",
+    "m_Id": 4,
+    "m_DisplayName": "A",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "A",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0ab1ebb0c5c84f0a9165facd4f4f5b5b",
     "m_Id": 4,
     "m_DisplayName": "R",
@@ -3555,8 +3570,8 @@
     "m_ObjectId": "0acf45c9674b498d956361102f7170e7",
     "m_Title": "Glitter Specular",
     "m_Position": {
-        "x": -4636.0,
-        "y": 2386.0
+        "x": -4636.00048828125,
+        "y": 2384.800048828125
     }
 }
 
@@ -4107,21 +4122,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "0aab67c1f63d4d3b9f4448ca7f39abc7",
-    "m_Id": 4,
-    "m_DisplayName": "A",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "A",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SamplerStateMaterialSlot",
     "m_ObjectId": "10073d4dc0724df4a2ef2f1cb972d499",
     "m_Id": 3,
@@ -4510,8 +4510,8 @@
     "m_ObjectId": "160d315abac74280a490aa16c33e0992",
     "m_Title": "Normal",
     "m_Position": {
-        "x": -2765.0,
-        "y": 258.0001220703125
+        "x": -2765.60009765625,
+        "y": 256.8001708984375
     }
 }
 
@@ -6849,8 +6849,8 @@
     "m_ObjectId": "44a525f4efca46fa9a503770732b5d97",
     "m_Title": "Sand Ripples",
     "m_Position": {
-        "x": -5488.0,
-        "y": 3726.0
+        "x": -5488.00048828125,
+        "y": 3724.800048828125
     }
 }
 
@@ -8319,6 +8319,40 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "5aa3b7d33f0c47fc8577b1448ddac044",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Occlusion",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "b02bdd86393a4feba344329dab76b843"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Occlusion"
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
     "m_ObjectId": "5abb480ef3a6442899c0a7bac9e516eb",
@@ -8609,8 +8643,8 @@
     "m_ObjectId": "5e0d2905684c429e982172cfdbd7fe28",
     "m_Title": "Rim Lighting",
     "m_Position": {
-        "x": -2819.0,
-        "y": 900.0001220703125
+        "x": -2819.199951171875,
+        "y": 899.199951171875
     }
 }
 
@@ -8709,40 +8743,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "5aa3b7d33f0c47fc8577b1448ddac044",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.Occlusion",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "b02bdd86393a4feba344329dab76b843"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.Occlusion"
 }
 
 {
@@ -11568,8 +11568,8 @@
     "m_ObjectId": "8bb315b1608d42d7a130d890776ccf1f",
     "m_Title": "Ocean Specular Colour",
     "m_Position": {
-        "x": -2759.0,
-        "y": 1455.0
+        "x": -2759.199951171875,
+        "y": 1454.39990234375
     }
 }
 
@@ -13521,6 +13521,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "aa718417f359491a9bba4c70d54cd1e5",
+    "m_Id": 5,
+    "m_DisplayName": "Z Buffer Sign",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Z Buffer Sign",
+    "m_StageCapability": 3,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "ac70c64a4bd04db9941f0dc4aa0fff7f",
     "m_Id": 0,
@@ -15176,8 +15191,8 @@
     "m_ObjectId": "c7c0a237ad994392884ce113df46b097",
     "m_Title": "Lighting Diffuse",
     "m_Position": {
-        "x": -2584.0,
-        "y": -236.0
+        "x": -2584.000244140625,
+        "y": -236.7998046875
     }
 }
 
@@ -18779,20 +18794,5 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "aa718417f359491a9bba4c70d54cd1e5",
-    "m_Id": 5,
-    "m_DisplayName": "Z Buffer Sign",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Z Buffer Sign",
-    "m_StageCapability": 3,
-    "m_Value": 1.0,
-    "m_DefaultValue": 1.0,
-    "m_Labels": []
 }
 

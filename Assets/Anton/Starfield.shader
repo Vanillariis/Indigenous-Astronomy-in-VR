@@ -17,6 +17,8 @@ Shader "Custom/Starfield"
         _MWIntensity("Milky Way Intensity", Float) = 1.0
         _MWBlendStart("Milky Way Blend Start", Range(0, 1)) = 0.2
         _MWBlendEnd("Milky Way Blend End", Range(0, 1)) = 0.8
+        
+        _Fade("Fading", Range(0, 1)) = 1.0
     }
 
     SubShader
@@ -46,6 +48,8 @@ Shader "Custom/Starfield"
             float4 _PoleColorTop;
             float4 _PoleColorBottom;
             float _PoleFadeSharpness;
+
+            float _Fade;
 
             TEXTURE2D(_BandMask);   SAMPLER(sampler_BandMask);
             TEXTURE2D(_NoiseTex);   SAMPLER(sampler_NoiseTex);
@@ -204,7 +208,7 @@ Shader "Custom/Starfield"
 
                 col += milkyCol;
                 col += starCol;
-                
+                col *= _Fade;
                 col += pow(col * _Intensity, float3(0.4545, 0.4545, 0.4545));
 
                 // Compute vertical direction (normalized -1 to 1)

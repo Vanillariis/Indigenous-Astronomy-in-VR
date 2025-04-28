@@ -1,0 +1,52 @@
+#pragma kernel CSMain
+
+struct StarData
+{
+    float3 position;
+    float3 velocity;
+    float life;
+    float startTime;
+    float3 color;
+};
+
+RWStructuredBuffer<StarData> starBuffer;
+
+float deltaTime;
+float swirlStrength;
+float3 origin;
+float currentTime;
+
+float rand(uint seed)
+{
+    seed = (seed << 13u) ^ seed;
+    return frac(1.0 - ((seed * (seed * seed * 15731u + 789221u) + 1376312589u) & 0x7fffffffu) / 1073741824.0);
+}
+
+[numthreads(64,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    uint index = id.x;
+    StarData star = starBuffer[index];
+
+    if (star.life == 0.0)
+    {
+        float3 dir = normalize(float3(rand(index), abs(rand(index + 1)), rand(index + 2)) * 2.0 - 1.0);
+        dir.y = abs(dir.y);
+
+        star.position = origin;
+        star.velocity = dir * (2.0 + rand(index + 3) * 2.0);
+        star.life = 15.0 + rand(index + 4) * 3.0;
+        star.startTime = currentTime;
+
+        float hue = rand(index + 5);
+        star.color = float3(1.0, 1.0, 1.0); // Pink to blue
+    }
+
+    float3 swirl = cross(float3(0, 1, 0), star.velocity) * pow(swirlStrength, 2);
+    star.velocity += swirl * deltaTime;
+
+    star.position += star.velocity * deltaTime;
+    star.life -= deltaTime;
+
+    starBuffer[index] = star;
+}
