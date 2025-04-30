@@ -32,9 +32,8 @@ public class FPSLogger : MonoBehaviour
 
     void Start()
     {
-        // Create a folder in the persistent data path for storing logs
-        string directoryPath = Path.Combine(Application.persistentDataPath, "Logs");
-        Directory.CreateDirectory(directoryPath);
+        // Get shared "Logs" directory path from LoggerUtils
+        string directoryPath = LoggerUtils.GetLogDirectory();
 
         // Create a unique log file with timestamped filename
         filePath = Path.Combine(directoryPath, $"FPS_Log_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.csv");
