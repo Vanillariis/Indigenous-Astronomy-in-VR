@@ -21,6 +21,7 @@ public class OstrichLogic : MonoBehaviour
     public GameObject FeatherTarget;
     public GameObject FeatherPrefab;
     private bool CastFeatherOnce;
+    public int FeatherCast;
 
 
     [Header("Spawn")]
@@ -49,6 +50,7 @@ public class OstrichLogic : MonoBehaviour
 
     [Header("End Scene")]
     public Kite Kite;
+    public VoiceOver voiceOver;
     public bool ReadyForEnd;
 
 
@@ -72,7 +74,7 @@ public class OstrichLogic : MonoBehaviour
 
 
         // Feather
-        if (CastFeatherOnce == false)
+        if (CastFeatherOnce == false && FeatherCast < 4)
         {
             if (Vector3.Distance(new Vector3(0, 0, transform.position.z), new Vector3(0, 0, Player.transform.position.z)) < 1)
             {
@@ -83,6 +85,8 @@ public class OstrichLogic : MonoBehaviour
                 CastFeatherOnce = true;
 
                 FeatherHasBeenAttached = false;
+
+                FeatherCast += 1;
             }
         }
 
@@ -130,6 +134,7 @@ public class OstrichLogic : MonoBehaviour
                 {
                     transform.position = StartPoint.position;
                     CastFeatherOnce = false;
+                    voiceOver.Instruction = false;
 
                     if (Kite.EndScene == true)
                     {

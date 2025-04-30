@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using UnityEngine.Audio;
 public class VoicePara
 {
     public AudioClip Audio;
+    public AudioClip AudioDub;
 
     [TextArea(5, 30)]
     public string Translation;
@@ -30,17 +31,37 @@ public class VoiceOver : MonoBehaviour
 
     public List<VoicePara> VoiceParas;
     public AudioSource AudioSource;
+    public AudioSource AudioSourceDub;
     public TMP_Text TranslationText;
+
+    public OstrichLogic ostrichLogic;
+
+    [Header("Dub")]
+    public float fadeDuration;
+    [Range(0f, 1f)] public float AudioSourceVolume_Min;
+    [Range(0f, 1f)] public float AudioSourceVolume_Max;
+
+    [Header("God Speaking")]
+    public bool Instruction;
+    public AudioSource LightGod_AudioSource;
+    public AudioSource DarkGod_AudioSource;
 
 
     // Update is called once per frame
     void Update()
     {
+        if (Instruction == true)
+        {
+            StartCoroutine(SpeakInstruction());
+        }
+
         if (Next == true)
         {
             if (DoneWithPara == true)
             {
                 if (Para >= VoiceParas.Count) return;
+
+                if (ostrichLogic.FeatherHasBeenAttached == false) return;
 
                 if (Auto == false)
                 {
@@ -52,14 +73,24 @@ public class VoiceOver : MonoBehaviour
 
 
                 AudioSource.clip = VoiceParas[Para].Audio;
+                AudioSourceDub.clip = VoiceParas[Para].AudioDub;
                 AudioSource.Play();
+
+                StartCoroutine(PipiEffect());
 
                 if (Para == 3)
                 {
                     OstrichPare.SetActive(true);
+                    ostrichLogic.FeatherHasBeenAttached = false;
                 }
 
-                if (Para == 0) //7
+                if (Para == 4)
+                {
+                    ostrichLogic.FeatherHasBeenAttached = true;
+                    Instruction = true;
+                }
+
+                if (Para == 7)
                 {
                     FindAnyObjectByType<Kite>().EndScene = true;
                 }
@@ -88,6 +119,62 @@ public class VoiceOver : MonoBehaviour
             }
         }
     }
+
+
+
+    IEnumerator SpeakInstruction()
+    {
+        while (Instruction == true)
+        {
+            LightGod_AudioSource.Play();
+            DarkGod_AudioSource.Play();
+
+            // Wait until it's time to fade out the real clip
+            yield return new WaitForSeconds(40);
+        }
+    }
+
+
+
+
+    IEnumerator PipiEffect()
+    {
+        // Calculate start time so the dub clip is centered within the real clip
+        float realClipLength = AudioSource.clip.length;
+        float dubClipLength = AudioSourceDub.clip.length;
+        float dubStartTime = Mathf.Max(0f, (realClipLength - dubClipLength) * 0.5f);
+
+        Debug.Log("wait: " + Mathf.Max(0f, dubStartTime - fadeDuration));
+
+        // Wait until it's time to fade out the real clip
+        yield return new WaitForSeconds(Mathf.Max(0f, dubStartTime - fadeDuration));
+
+        // Fade down the real clip
+        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Min, fadeDuration));
+
+        // Play the dub clip
+        AudioSourceDub.Play();
+
+        // Wait for the dub clip to finish
+        yield return new WaitForSeconds(AudioSourceDub.clip.length);
+
+        // Fade the real clip back up
+        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Max, fadeDuration));
+    }
+
+    IEnumerator FadeVolume(AudioSource source, float from, float to, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(from, to, elapsed / duration);
+            yield return null;
+        }
+        source.volume = to;
+    }
+
+
 
 
     IEnumerator TypeText(string translations, float typeSpeed)
