@@ -1,10 +1,10 @@
-using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 
 [System.Serializable]
@@ -13,7 +13,7 @@ public class VoicePara
     public AudioClip Audio;
     public AudioClip AudioDub;
 
-    [TextArea(5, 30)]
+    [TextArea(10, 30)]
     public string Translation;
 }
 
@@ -46,19 +46,40 @@ public class VoiceOver : MonoBehaviour
     public AudioSource LightGod_AudioSource;
     public AudioSource DarkGod_AudioSource;
 
+    [Header("DontDestroyOnLoad")]
+    public static VoiceOver Instance { get; private set; }
+
+    void Awake()
+    {
+        // If there isn’t already one, make this the singleton instance
+        if (Instance == null)
+        {
+            Instance = this;
+
+            // Prevent this GameObject from being destroyed on scene load
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If another instance exists, destroy this one to enforce singleton
+            Destroy(gameObject);
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Instruction == true)
-        {
-            StartCoroutine(SpeakInstruction());
-        }
-
         if (Next == true)
         {
             if (DoneWithPara == true)
             {
+                if (Instruction == true)
+                {
+                    StartCoroutine(SpeakInstruction());
+                    return;
+                }
+
                 if (Para >= VoiceParas.Count) return;
 
                 if (ostrichLogic.FeatherHasBeenAttached == false) return;
@@ -78,21 +99,31 @@ public class VoiceOver : MonoBehaviour
 
                 StartCoroutine(PipiEffect());
 
-                if (Para == 3)
+                if (Para == 2)
+                {
+                    GoToScene("GodScene");
+                }
+
+                if (Para == 4)
                 {
                     OstrichPare.SetActive(true);
                     ostrichLogic.FeatherHasBeenAttached = false;
                 }
 
-                if (Para == 4)
+                if (Para == 5)
                 {
                     ostrichLogic.FeatherHasBeenAttached = true;
                     Instruction = true;
                 }
 
-                if (Para == 7)
+                if (Para == 9)
                 {
                     FindAnyObjectByType<Kite>().EndScene = true;
+                }
+
+                if (Para == 12)
+                {
+                    GoToScene("SunsetScene");
                 }
 
                 if (ShowText == true)
@@ -215,5 +246,12 @@ public class VoiceOver : MonoBehaviour
                 TranslationText.text = "";
             }
         }
+    }
+
+
+    // Call this method to switch scenes
+    public void GoToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
