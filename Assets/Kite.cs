@@ -30,10 +30,28 @@ public class Kite : MonoBehaviour
     public SkyBoxSequenceController SkyBoxSequenceController;
     public StarBurstRenderer StarBurstRenderer;
 
+    [Header("Bloom")]
+    public Renderer kiteRenderer;
+    public Renderer ostrichRenderer;
+
+    public Color kiteEndEmmision = Color.white * 7f;
+    public Color OstrichEndEmmision = Color.white * 7f;
+
+    private Color kiteStartEmmision = Color.black;
+    private Color ostrichStartEmmision = Color.black;
+    
+    
+    private MaterialPropertyBlock kiteBlock;
+    private MaterialPropertyBlock ostrichBlock;
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartPos = transform.position;
+        
+        kiteBlock = new MaterialPropertyBlock();
+        ostrichBlock = new MaterialPropertyBlock();
     }
 
     // Update is called once per frame
@@ -52,11 +70,22 @@ public class Kite : MonoBehaviour
 
             Speed = OstrichLogic.Speed;
 
+            float journeyProgress = Mathf.InverseLerp(0f, Vector3.Distance(StartPos, EndPoint.transform.position),
+                Vector3.Distance(transform.position, StartPos));
+            
+            Color kiteEmmision = Color.Lerp(kiteStartEmmision, kiteEndEmmision, journeyProgress);
+            kiteBlock.SetColor("_EmissionColor", kiteEmmision);
+            kiteRenderer.SetPropertyBlock(kiteBlock);
+            
+            Color ostrichEmmision = Color.Lerp(ostrichStartEmmision, OstrichEndEmmision, journeyProgress);
+            ostrichBlock.SetColor("_EmissionColor", ostrichEmmision);
+            ostrichRenderer.SetPropertyBlock(ostrichBlock);
+
             if (Vector3.Distance(transform.position, EndPoint.transform.position) < 0.1)
             {
                 SkyBoxSequenceController.Explode();
                 StarBurstRenderer.Explode();
-
+                
                 Destroy(OstrichLogic.gameObject);
                 Destroy(this.gameObject);
             }

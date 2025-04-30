@@ -228,6 +228,7 @@ Shader "Custom/Starfield"
                 // Multiply final color
                 col *= poleGradient;
                 col *= edgeFader;
+                col = saturate(col); // clamps between 0 and 1
                 return float4(col, 1.0);
             }
 
