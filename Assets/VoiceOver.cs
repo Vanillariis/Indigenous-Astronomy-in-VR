@@ -105,7 +105,7 @@ public class VoiceOver : MonoBehaviour
                     GoToScene("GodScene");
                 }
 
-                if (Para == 4)
+                if (Para == 4) //4
                 {
                     OstrichPare.SetActive(true);
                     ostrichLogic.FeatherHasBeenAttached = false;
