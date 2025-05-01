@@ -25,6 +25,8 @@ Shader "Custom/Starfield"
     {
         Tags { "RenderType"="Opaque" "Queue"="Background" }
         Cull Front
+        ZWrite Off    //added
+        ZTest Always //added
         LOD 100
 
         Pass
