@@ -43,6 +43,7 @@ public class VoiceOver : MonoBehaviour
 
     [Header("God Speaking")]
     public bool Instruction;
+    public bool Done;
     public AudioSource LightGod_AudioSource;
     public AudioSource DarkGod_AudioSource;
 
@@ -82,7 +83,7 @@ public class VoiceOver : MonoBehaviour
 
                 if (Para >= VoiceParas.Count) return;
 
-                if (ostrichLogic.FeatherHasBeenAttached == false) return;
+                if (Done == false) return;
 
                 if (Auto == false)
                 {

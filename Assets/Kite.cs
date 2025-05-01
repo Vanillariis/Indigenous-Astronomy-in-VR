@@ -43,7 +43,9 @@ public class Kite : MonoBehaviour
     
     private MaterialPropertyBlock kiteBlock;
     private MaterialPropertyBlock ostrichBlock;
-    
+
+    public VoiceOver VoiceOver;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -107,6 +109,8 @@ public class Kite : MonoBehaviour
                 if (FeatherAttacheded == true)
                 {
                     FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+                    VoiceOver.Instruction = false;
+                    VoiceOver.Done = true;
                 }
             }
 

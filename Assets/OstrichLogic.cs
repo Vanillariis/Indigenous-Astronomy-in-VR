@@ -50,7 +50,7 @@ public class OstrichLogic : MonoBehaviour
 
     [Header("End Scene")]
     public Kite Kite;
-    public VoiceOver voiceOver;
+    public VoiceOver VoiceOver;
     public bool ReadyForEnd;
 
 
@@ -134,7 +134,7 @@ public class OstrichLogic : MonoBehaviour
                 {
                     transform.position = StartPoint.position;
                     CastFeatherOnce = false;
-                    voiceOver.Instruction = false;
+                    VoiceOver.Done = false;
 
                     if (Kite.EndScene == true)
                     {
