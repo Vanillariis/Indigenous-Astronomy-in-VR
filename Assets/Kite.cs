@@ -45,6 +45,7 @@ public class Kite : MonoBehaviour
     private MaterialPropertyBlock ostrichBlock;
 
     public VoiceOver VoiceOver;
+    public OstrichLogic ostrichLogic;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

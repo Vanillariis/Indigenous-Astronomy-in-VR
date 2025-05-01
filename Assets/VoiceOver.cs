@@ -35,6 +35,7 @@ public class VoiceOver : MonoBehaviour
     public TMP_Text TranslationText;
 
     public OstrichLogic ostrichLogic;
+    public Kite kite;
 
     [Header("Dub")]
     public float fadeDuration;
@@ -44,26 +45,21 @@ public class VoiceOver : MonoBehaviour
     [Header("God Speaking")]
     public bool Instruction;
     public bool Done;
-    public AudioSource LightGod_AudioSource;
-    public AudioSource DarkGod_AudioSource;
 
     [Header("DontDestroyOnLoad")]
     public static VoiceOver Instance { get; private set; }
 
     void Awake()
     {
-        // If there isn’t already one, make this the singleton instance
         if (Instance == null)
         {
             Instance = this;
-
-            // Prevent this GameObject from being destroyed on scene load
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            // If another instance exists, destroy this one to enforce singleton
             Destroy(gameObject);
+            return;
         }
     }
 
@@ -100,7 +96,7 @@ public class VoiceOver : MonoBehaviour
 
                 StartCoroutine(PipiEffect());
 
-                if (Para == 2)
+                if (Para == 2) //2
                 {
                     GoToScene("GodScene");
                 }
@@ -119,7 +115,7 @@ public class VoiceOver : MonoBehaviour
 
                 if (Para == 9)
                 {
-                    FindAnyObjectByType<Kite>().EndScene = true;
+                    kite.EndScene = true;
                 }
 
                 if (Para == 12)
@@ -158,8 +154,8 @@ public class VoiceOver : MonoBehaviour
     {
         while (Instruction == true)
         {
-            LightGod_AudioSource.Play();
-            DarkGod_AudioSource.Play();
+            ostrichLogic.LightGod_AudioSource.Play();
+            ostrichLogic.DarkGod_AudioSource.Play();
 
             // Wait until it's time to fade out the real clip
             yield return new WaitForSeconds(40);
@@ -227,7 +223,7 @@ public class VoiceOver : MonoBehaviour
 
             if (letter == ' ')
             {
-                adjustedSpeed *= 1.1f; 
+                adjustedSpeed *= 1.1f;
             }
 
             if (letter == ',')
@@ -254,5 +250,30 @@ public class VoiceOver : MonoBehaviour
     public void GoToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Kite k = FindObjectOfType<Kite>();
+        if (k != null)
+        {
+            kite = k;
+            kite.VoiceOver = this;
+
+            ostrichLogic = kite.OstrichLogic;
+            OstrichPare = ostrichLogic.transform.parent.gameObject;
+
+            ostrichLogic.VoiceOver = this;
+        }
     }
 }

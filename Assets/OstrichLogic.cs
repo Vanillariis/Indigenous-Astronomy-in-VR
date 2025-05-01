@@ -48,6 +48,9 @@ public class OstrichLogic : MonoBehaviour
     public List<MultiAimConstraint> DarkGodHeadIk;
     public MultiAimConstraint DarkGodHeadLookAtNowIk;
 
+    public AudioSource LightGod_AudioSource;
+    public AudioSource DarkGod_AudioSource;
+
     [Header("End Scene")]
     public Kite Kite;
     public VoiceOver VoiceOver;
