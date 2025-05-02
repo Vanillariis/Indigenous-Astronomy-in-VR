@@ -166,7 +166,7 @@ public class VoiceOver : MonoBehaviour
             ostrichLogic.DarkGod_AudioSource.Play();
 
             // Wait until it's time to fade out the real clip
-            yield return new WaitForSeconds(40);
+            yield return new WaitForSeconds(25);
         }
     }
 

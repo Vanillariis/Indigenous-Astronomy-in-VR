@@ -63,7 +63,7 @@ public class OstrichLogic : MonoBehaviour
 
         Ani = GetComponentInChildren<Animator>();
 
-        FeatherHasBeenAttached = true;
+        //FeatherHasBeenAttached = true;
     }
 
 
