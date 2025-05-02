@@ -9249,6 +9249,67 @@ Transform:
   - {fileID: 1063547655}
   m_Father: {fileID: 1104472719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &586693235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586693238}
+  - component: {fileID: 586693237}
+  - component: {fileID: 586693236}
+  m_Layer: 0
+  m_Name: LoggingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &586693236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586693235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f467b4066c434626aad8d35193a3f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHand: {fileID: 2091422721}
+  rightHand: {fileID: 1891706608}
+  logInterval: 1
+--- !u!114 &586693237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586693235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d658b067dae274a78908c76564419796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logInterval: 1
+--- !u!4 &586693238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586693235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -101.071724, y: 0.8092356, z: 165.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587202196
 GameObject:
   m_ObjectHideFlags: 0
@@ -19650,6 +19711,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1719931824359553294, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
+      propertyPath: m_Flip.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719931824359553294, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
+      propertyPath: m_Flip.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719931824359553294, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: m_RenderMode
       value: 4
       objectReference: {fileID: 0}
@@ -19660,6 +19729,10 @@ PrefabInstance:
     - target: {fileID: 6059025190811528190, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: m_Volume
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365590328312095385, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
+      propertyPath: lengthInSec
+      value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 6365590328312095385, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -27558,6 +27631,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1719931824359553294, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
+      propertyPath: m_Flip.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719931824359553294, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: m_RenderMode
       value: 4
       objectReference: {fileID: 0}
@@ -27568,6 +27645,10 @@ PrefabInstance:
     - target: {fileID: 6059025190811528190, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: m_Volume
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365590328312095385, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
+      propertyPath: lengthInSec
+      value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 6365590328312095385, guid: 5a30f4f37d7ce495093451dd7dd63bfa, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -33557,3 +33638,4 @@ SceneRoots:
   - {fileID: 1945499547}
   - {fileID: 4931315341987536283}
   - {fileID: 1751639498}
+  - {fileID: 586693238}
