@@ -22,14 +22,16 @@ public class Feather : MonoBehaviour
         Kite.FeatherAttacheded = false;
 
         OL = FindAnyObjectByType<OstrichLogic>();
+        grabbable = GetComponentInChildren<Grabbable>();
     }
 
     private void FixedUpdate()
     {
         if (Still == false)
         {
-            if (Vector3.Distance(transform.position, Target.transform.position) > .001)
+            if (Vector3.Distance(transform.position, Target.transform.position) > .01)
             {
+                Debug.Log(Vector3.Distance(transform.position, Target.transform.position));
                 transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Speed);
             }
             else

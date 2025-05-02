@@ -44,6 +44,7 @@ public class VoiceOver : MonoBehaviour
 
     [Header("God Speaking")]
     public bool Instruction;
+    public bool InstructionOnce;
     public bool Done;
 
     [Header("DontDestroyOnLoad")]
@@ -73,7 +74,12 @@ public class VoiceOver : MonoBehaviour
             {
                 if (Instruction == true)
                 {
-                    StartCoroutine(SpeakInstruction());
+                    if (InstructionOnce == false)
+                    {
+                        StartCoroutine(SpeakInstruction());
+                        InstructionOnce = true;
+                    }
+
                     return;
                 }
 
@@ -107,18 +113,18 @@ public class VoiceOver : MonoBehaviour
                     ostrichLogic.FeatherHasBeenAttached = false;
                 }
 
-                if (Para == 5)
+                if (Para == 5) // 5
                 {
                     ostrichLogic.FeatherHasBeenAttached = true;
                     Instruction = true;
                 }
 
-                if (Para == 9)
+                if (Para == 9) //9
                 {
                     kite.EndScene = true;
                 }
 
-                if (Para == 12)
+                if (Para == 12) // 12
                 {
                     GoToScene("SunsetScene");
                 }
@@ -154,6 +160,8 @@ public class VoiceOver : MonoBehaviour
     {
         while (Instruction == true)
         {
+            Debug.Log("God Speaking");
+
             ostrichLogic.LightGod_AudioSource.Play();
             ostrichLogic.DarkGod_AudioSource.Play();
 
@@ -172,13 +180,20 @@ public class VoiceOver : MonoBehaviour
         float dubClipLength = AudioSourceDub.clip.length;
         float dubStartTime = Mathf.Max(0f, (realClipLength - dubClipLength) * 0.5f);
 
-        Debug.Log("wait: " + Mathf.Max(0f, dubStartTime - fadeDuration));
+        float waitTime = Mathf.Max(0f, dubStartTime - fadeDuration);
+
+        float realfadeDuration = fadeDuration;
+
+        if (waitTime <= 5)
+        {
+            realfadeDuration = 1;
+        }
 
         // Wait until it's time to fade out the real clip
-        yield return new WaitForSeconds(Mathf.Max(0f, dubStartTime - fadeDuration));
+        yield return new WaitForSeconds(waitTime);
 
         // Fade down the real clip
-        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Min, fadeDuration));
+        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Min, realfadeDuration));
 
         // Play the dub clip
         AudioSourceDub.Play();
@@ -187,7 +202,7 @@ public class VoiceOver : MonoBehaviour
         yield return new WaitForSeconds(AudioSourceDub.clip.length);
 
         // Fade the real clip back up
-        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Max, fadeDuration));
+        yield return StartCoroutine(FadeVolume(AudioSource, AudioSource.volume, AudioSourceVolume_Max, realfadeDuration));
     }
 
     IEnumerator FadeVolume(AudioSource source, float from, float to, float duration)
