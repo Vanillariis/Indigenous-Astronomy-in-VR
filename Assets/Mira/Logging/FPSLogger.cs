@@ -78,7 +78,7 @@ public class FPSLogger : MonoBehaviour
         }
         
         // Start timer if the object becomes active and timer hasn't already started
-        if (saveLogTriggerObject != null && saveLogTriggerObject.activeSelf && !saveCountdownStarted)
+        if (saveLogTriggerObject != null && saveLogTriggerObject.activeSelf && !saveCountdownStarted && SceneManager.GetActiveScene().name == "SunsetScene")
         {
             saveCountdownStarted = true;
             saveTimer = 0f;
