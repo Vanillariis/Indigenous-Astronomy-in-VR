@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement; // For scene change tracking
 
 public class FPSLogger : MonoBehaviour
 {
+    // FPS Stuff
+    
     public float logInterval = 1f; // Time interval between each FPS log (in seconds)
     private float timer = 0f; // Accumulates time for FPS calculation
     private int frameCount = 0; // Counts frames per log interval
@@ -13,7 +15,14 @@ public class FPSLogger : MonoBehaviour
     private string filePath; //Used to print the filePath once the file has been saved
 
     private static FPSLogger instance; // Singleton to ensure only one logger instance across scenes
+    
+    // Saving the file after 30 seconds
+    
+    public GameObject saveLogTriggerObject; //
+    public float saveDelay = 30f;
 
+    private bool saveCountdownStarted = false;
+    private float saveTimer = 0f;
     void Awake()
     {
         // Ensure only one instance of the logger persists across scenes
@@ -66,6 +75,25 @@ public class FPSLogger : MonoBehaviour
             // Reset counters after logging
             timer = 0f;
             frameCount = 0;
+        }
+        
+        // Start timer if the object becomes active and timer hasn't already started
+        if (saveLogTriggerObject != null && saveLogTriggerObject.activeSelf && !saveCountdownStarted)
+        {
+            saveCountdownStarted = true;
+            saveTimer = 0f;
+        }
+
+        // Count down and save when time is up
+        if (saveCountdownStarted)
+        {
+            saveTimer += Time.unscaledDeltaTime;
+
+            if (saveTimer >= saveDelay)
+            {
+                SaveLog();
+                saveCountdownStarted = false; // prevent saving again
+            }
         }
     }
 

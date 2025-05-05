@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class HandTrackingLogger : MonoBehaviour
 {
-    // Singleton instance (ensures only one logger exists)
+    // Handtracking stuff
+    
     private static HandTrackingLogger instance;
-
-    // Assign these in the Unity Inspector
+    
     public Transform leftHand;
     public Transform rightHand;
 
@@ -17,6 +17,14 @@ public class HandTrackingLogger : MonoBehaviour
 
     private List<string> logLines = new List<string>();
     private string filePath;
+    
+    // Saving the file after 30 seconds
+    
+    public GameObject saveLogTriggerObject; //
+    public float saveDelay = 30f;
+
+    private bool saveCountdownStarted = false;
+    private float saveTimer = 0f;
 
     void Awake()
     {
@@ -69,6 +77,26 @@ public class HandTrackingLogger : MonoBehaviour
             logLines.Add(line);
 
             timer = 0f;
+        }
+        
+        
+        // Start timer if the object becomes active and timer hasn't already started
+        if (saveLogTriggerObject != null && saveLogTriggerObject.activeSelf && !saveCountdownStarted)
+        {
+            saveCountdownStarted = true;
+            saveTimer = 0f;
+        }
+
+// Count down and save when time is up
+        if (saveCountdownStarted)
+        {
+            saveTimer += Time.unscaledDeltaTime;
+
+            if (saveTimer >= saveDelay)
+            {
+                SaveLog();
+                saveCountdownStarted = false; // prevent saving again
+            }
         }
     }
 
