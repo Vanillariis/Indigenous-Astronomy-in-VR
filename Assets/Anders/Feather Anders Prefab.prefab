@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 3857518536432783180}
   - component: {fileID: 9084642688514600536}
   m_Layer: 0
-  m_Name: Feather Placeholder
+  m_Name: Feather Anders Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
