@@ -108,18 +108,18 @@ public class VoiceOver : MonoBehaviour
 
                 StartCoroutine(PipiEffect());
 
-                if (Para == 20) //2
+                if (Para == 2) //2
                 {
                     StartCoroutine(FadeAndSwitchScenes("GodScene"));
                 }
 
-                if (Para == 0) //4
+                if (Para == 4) //4
                 {
                     OstrichPare.SetActive(true);
                     ostrichLogic.FeatherHasBeenAttached = false;
                 }
 
-                if (Para == 1) // 5
+                if (Para == 5) // 5
                 {
                     ostrichLogic.FeatherHasBeenAttached = true;
                     Instruction = true;
