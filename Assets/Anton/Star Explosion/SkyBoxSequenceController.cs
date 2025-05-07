@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class SkyBoxSequenceController : MonoBehaviour
 {
     [Header("Moon Settings")]
@@ -27,6 +28,12 @@ public class SkyBoxSequenceController : MonoBehaviour
     private float fadeStartTime;
 
     private bool Doit;
+
+    [Header("Lyd")]
+    public AudioSource audioSource;
+    public AudioClip explosion;
+    public AudioClip glitter;
+    private bool glitterOnce;
 
     void Start()
     {
@@ -59,6 +66,15 @@ public class SkyBoxSequenceController : MonoBehaviour
                 float intensity = Mathf.Lerp(0f, maxSkyboxIntensity, t);
                 starfieldSkyboxMaterial.SetFloat("_Fade", intensity);
             }
+
+
+            if (glitterOnce == false && !audioSource.isPlaying && audioSource.time > 0f)
+            {
+                audioSource.clip = glitter;
+                audioSource.Play();
+
+                glitterOnce = true;
+            }
         }
     }
 
@@ -80,5 +96,8 @@ public class SkyBoxSequenceController : MonoBehaviour
 
 
         Doit = true;
+
+        audioSource.clip = explosion;
+        audioSource.Play();
     }
 }
