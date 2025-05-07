@@ -31,7 +31,6 @@ public class Feather : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, Target.transform.position) > .01)
             {
-                Debug.Log(Vector3.Distance(transform.position, Target.transform.position));
                 transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Speed);
             }
             else
@@ -45,16 +44,6 @@ public class Feather : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, Kite.transform.position) < .5f)
-        {
-            Kite.FeatherPlaced();
-
-            OL.LookAtFeather = false;
-            OL.LookAtKite = false;
-
-            Destroy(this.gameObject);
-        }
-
         if (grabbable.HasBeenGrabed == true)
         {
             Kite.KiteState = KiteState.HoistIn;
@@ -65,6 +54,17 @@ public class Feather : MonoBehaviour
         {
             OL.LookAtFeather = true;
             OL.LookAtKite = false;
+        }
+
+
+        if (Vector3.Distance(transform.position, Kite.transform.position) < .5f)
+        {
+            Kite.FeatherPlaced();
+
+            OL.LookAtFeather = false;
+            OL.LookAtKite = false;
+
+            Destroy(this.gameObject);
         }
     }
 }

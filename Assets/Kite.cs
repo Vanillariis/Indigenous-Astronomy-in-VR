@@ -95,7 +95,7 @@ public class Kite : MonoBehaviour
             else
             {
                 HoistInPoint.transform.parent = transform;
-                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed);
+                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed * 4);
                 kiteLine.ground = HoistInPoint.transform;
 
             }
