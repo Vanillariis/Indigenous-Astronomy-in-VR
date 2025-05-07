@@ -290,6 +290,40 @@ public class VoiceOver : MonoBehaviour
 
             ostrichLogic.VoiceOver = this;
         }
+        
+        if (scene.name == "SunsetScene")
+        {
+            // 1. Handle audio switch
+            GameObject audioManager = GameObject.Find("AudioManager");
+            if (audioManager != null)
+            {
+                Transform twilight = audioManager.transform.Find("Twilight");
+                Transform night = audioManager.transform.Find("Night");
+
+                if (twilight != null && night != null)
+                {
+                    AudioSource twilightSource = twilight.GetComponent<AudioSource>();
+                    AudioSource nightSource = night.GetComponent<AudioSource>();
+
+                    if (twilightSource != null) twilightSource.Stop();
+                    if (nightSource != null) nightSource.Play();
+                }
+            }
+
+            // 2. Enable skybox GameObject
+            GameObject skybox = GameObject.Find("Skybox");
+            if (skybox != null)
+            {
+                skybox.SetActive(true);
+            }
+
+            // 3. Switch lights
+            GameObject mainLight = GameObject.Find("Directional Light");
+            GameObject nightLight = GameObject.Find("Night Directional Light");
+
+            if (mainLight != null) mainLight.SetActive(false);
+            if (nightLight != null) nightLight.SetActive(true);
+        }
     }
     
     private IEnumerator FadeAndSwitchScenes(string sceneName)
