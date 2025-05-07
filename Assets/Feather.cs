@@ -45,7 +45,7 @@ public class Feather : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, Kite.transform.position) < 3)
+        if (Vector3.Distance(transform.position, Kite.transform.position) < .5f)
         {
             Kite.FeatherPlaced();
 
