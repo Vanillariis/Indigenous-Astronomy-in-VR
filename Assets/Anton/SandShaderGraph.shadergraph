@@ -2677,7 +2677,7 @@
         "preventRotation": false
     },
     "m_Path": "Shader Graphs",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -3570,7 +3570,7 @@
     "m_ObjectId": "0acf45c9674b498d956361102f7170e7",
     "m_Title": "Glitter Specular",
     "m_Position": {
-        "x": -4636.00048828125,
+        "x": -4635.9990234375,
         "y": 2384.800048828125
     }
 }
@@ -4510,8 +4510,8 @@
     "m_ObjectId": "160d315abac74280a490aa16c33e0992",
     "m_Title": "Normal",
     "m_Position": {
-        "x": -2765.60009765625,
-        "y": 256.8001708984375
+        "x": -2765.599853515625,
+        "y": 256.8000183105469
     }
 }
 
@@ -6849,8 +6849,8 @@
     "m_ObjectId": "44a525f4efca46fa9a503770732b5d97",
     "m_Title": "Sand Ripples",
     "m_Position": {
-        "x": -5488.00048828125,
-        "y": 3724.800048828125
+        "x": -5487.99853515625,
+        "y": 3724.7998046875
     }
 }
 
@@ -11569,7 +11569,7 @@
     "m_Title": "Ocean Specular Colour",
     "m_Position": {
         "x": -2759.199951171875,
-        "y": 1454.39990234375
+        "y": 1454.3997802734375
     }
 }
 
@@ -15191,8 +15191,8 @@
     "m_ObjectId": "c7c0a237ad994392884ce113df46b097",
     "m_Title": "Lighting Diffuse",
     "m_Position": {
-        "x": -2584.000244140625,
-        "y": -236.7998046875
+        "x": -2583.999755859375,
+        "y": -236.79995727539063
     }
 }
 

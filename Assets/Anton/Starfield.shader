@@ -194,7 +194,7 @@ Shader "Custom/Starfield"
 
                 //col *= mask;
                 float3 starCol = float3(0, 0, 0);
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     float i_f = j / 4.0;
                     float depth = frac(i_f );

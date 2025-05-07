@@ -7,18 +7,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: darkgodMaterial
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: SandGodScene
+  m_Shader: {fileID: -6465566751694194690, guid: 8aeac17a167296646886464f6b0e385d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -65,8 +64,32 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_391d514d275f447eb3e04ad6a4851dfe_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 9e5eb2ef9b52f94468de5fab7e7f2e3e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_99cda061909446709e0b2fc0781da607_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5224be8c24c5dc84d93b3a302bab5467, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShallowNormalMap_X:
+        m_Texture: {fileID: 2800000, guid: 6ca8139d61ececc408a905e912742681, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShallowNormalMap_Y:
+        m_Texture: {fileID: 2800000, guid: 460ba2a553ee8804fbdaa868621d6fb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SteepNormalMap_X:
+        m_Texture: {fileID: 2800000, guid: 1fa90bd9a08d86d418f3138f8bffb0ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SteepNormalMap_Y:
+        m_Texture: {fileID: 2800000, guid: b062b8c39cdfbc042ba43ca896e6076f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -91,37 +114,57 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _DuneDirectionX: 1.29
+    - _DuneDirectionY: 2.69
     - _EnvironmentReflections: 1
+    - _GlitterIntensity: 0.439
+    - _GlitterThreshold: 0.645
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _OceanSpecularPower: 0.54
+    - _OceanSpecularStrength: 0.21
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _RimPower: 0.7
+    - _RimStrength: 1.46
+    - _SandStrength: 0.04
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 0.47
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _Steepness: 53.28
+    - _SteepnessSharpnessPower: 77.9
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0.2509804}
-    - _Color: {r: 0, g: 0, b: 0, a: 0.2509804}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GlitterColour: {r: 1367.1202, g: 1367.1202, b: 1367.1202, a: 0}
+    - _GlitterTiling: {r: 4, g: 4, b: 0, a: 0}
+    - _OceanSpecularColour: {r: 0.8396226, g: 0.79201597, b: 0.7168476, a: 0}
+    - _RimColour: {r: 1, g: 0.8400411, b: 0.5707547, a: 0}
+    - _RipplesNormalTiling: {r: 2, g: 2, b: 0, a: 0}
+    - _ShadowColour: {r: 0.4716981, g: 0.24540344, b: 0.037824854, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SurfaceColour: {r: 1, g: 0.8699127, b: 0.6650944, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6835748485030349317
+--- !u!114 &7489124886251677494
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
