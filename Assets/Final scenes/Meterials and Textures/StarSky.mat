@@ -135,7 +135,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PoleFadeSharpness: 0.96
+    - _PoleFadeSharpness: 0.58
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -143,8 +143,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StarFalloffEnd: 40.15
-    - _StarFalloffStart: 0.25
+    - _StarFalloffEnd: 20
+    - _StarFalloffStart: 0.3
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
