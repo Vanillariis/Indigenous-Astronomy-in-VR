@@ -125,7 +125,7 @@ Material:
     - _DustIntensity: 1.74
     - _DustTiling: 6.42
     - _EnvironmentReflections: 1
-    - _Fade: 1
+    - _Fade: 0
     - _Flare: 0.6
     - _GlossMapScale: 0
     - _Glossiness: 0

@@ -137,7 +137,6 @@ public class OstrichLogic : MonoBehaviour
                 {
                     transform.position = StartPoint.position;
                     CastFeatherOnce = false;
-                    VoiceOver.Done = false;
 
                     if (Kite.EndScene == true)
                     {

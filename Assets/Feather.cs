@@ -21,6 +21,8 @@ public class Feather : MonoBehaviour
         Kite = FindAnyObjectByType<Kite>();
         Kite.FeatherAttacheded = false;
 
+        FindAnyObjectByType<VoiceOver>().Instruction = true;
+
         OL = FindAnyObjectByType<OstrichLogic>();
         grabbable = GetComponentInChildren<Grabbable>();
     }

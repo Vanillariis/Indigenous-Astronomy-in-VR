@@ -113,7 +113,6 @@ public class Kite : MonoBehaviour
                 {
                     FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
                     VoiceOver.Instruction = false;
-                    VoiceOver.Done = true;
                     FeatherAttacheded = false;
                 }
             }

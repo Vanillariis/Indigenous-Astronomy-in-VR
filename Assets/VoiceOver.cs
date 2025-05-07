@@ -91,7 +91,6 @@ public class VoiceOver : MonoBehaviour
 
                 if (Para >= VoiceParas.Count) return;
 
-                if (Done == false) return;
 
                 if (Auto == false)
                 {
@@ -122,7 +121,6 @@ public class VoiceOver : MonoBehaviour
                 if (Para == 5) // 5
                 {
                     ostrichLogic.FeatherHasBeenAttached = true;
-                    Instruction = true;
                 }
 
                 if (Para == 9) //9
