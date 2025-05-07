@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HandTrackingLogger : MonoBehaviour
 {
@@ -25,6 +27,10 @@ public class HandTrackingLogger : MonoBehaviour
 
     private bool saveCountdownStarted = false;
     private float saveTimer = 0f;
+    
+    // Fadeout at the end
+    public Image blinkFadeImage;
+    public float blinkFadeDuration = 1f;
 
     void Awake()
     {
@@ -118,5 +124,30 @@ public class HandTrackingLogger : MonoBehaviour
     {
         File.WriteAllLines(filePath, logLines);
         Debug.Log("Hand tracking log saved to: " + filePath);
+
+        StartCoroutine(FadeOutEnd());
+    }
+    
+    
+    private IEnumerator FadeOutEnd()
+    {
+        // Fade to black
+        yield return StartCoroutine(Fade(0f, 1f));
+    }
+
+    private IEnumerator Fade(float startAlpha, float endAlpha)
+    {
+        float timer = 0f;
+        Color color = blinkFadeImage.color;
+
+        while (timer < blinkFadeDuration)
+        {
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, timer / blinkFadeDuration);
+            blinkFadeImage.color = new Color(color.r, color.g, color.b, alpha);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        blinkFadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
     }
 }
