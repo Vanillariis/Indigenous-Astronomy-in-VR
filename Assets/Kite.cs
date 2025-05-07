@@ -141,12 +141,12 @@ public class Kite : MonoBehaviour
 
         if (FeatherAttacheds == 2)
         {
-            Happiness = 70;
+            Happiness = 60;
         }
 
         if (FeatherAttacheds == 3)
         {
-            Happiness = 40;
+            Happiness = 20;
         }
 
         if (FeatherAttacheds == 4)
