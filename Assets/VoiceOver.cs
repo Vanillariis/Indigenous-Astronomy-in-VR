@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 [System.Serializable]
@@ -49,7 +50,11 @@ public class VoiceOver : MonoBehaviour
 
     [Header("DontDestroyOnLoad")]
     public static VoiceOver Instance { get; private set; }
-
+    
+    [Header("BlinkEffect")]
+    public Image blinkFadeImage;
+    public float blinkFadeDuration = 0.5f;
+    
     void Awake()
     {
         if (Instance == null)
@@ -104,7 +109,7 @@ public class VoiceOver : MonoBehaviour
 
                 if (Para == 2) //2
                 {
-                    GoToScene("GodScene");
+                    StartCoroutine(FadeAndSwitchScenes("GodScene"));
                 }
 
                 if (Para == 4) //4
@@ -126,7 +131,7 @@ public class VoiceOver : MonoBehaviour
 
                 if (Para == 12) // 12
                 {
-                    GoToScene("SunsetScene");
+                    StartCoroutine(FadeAndSwitchScenes("SunsetScene"));
                 }
 
                 if (ShowText == true)
@@ -260,12 +265,7 @@ public class VoiceOver : MonoBehaviour
         }
     }
 
-
-    // Call this method to switch scenes
-    public void GoToScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+    
 
     void OnEnable()
     {
@@ -290,5 +290,67 @@ public class VoiceOver : MonoBehaviour
 
             ostrichLogic.VoiceOver = this;
         }
+        
+        if (scene.name == "SunsetScene")
+        {
+            // 1. Handle audio switch
+            GameObject audioManager = GameObject.Find("AudioManager");
+            if (audioManager != null)
+            {
+                Transform twilight = audioManager.transform.Find("Twilight");
+                Transform night = audioManager.transform.Find("Night");
+
+                if (twilight != null && night != null)
+                {
+                    AudioSource twilightSource = twilight.GetComponent<AudioSource>();
+                    AudioSource nightSource = night.GetComponent<AudioSource>();
+
+                    if (twilightSource != null) twilightSource.Stop();
+                    if (nightSource != null) nightSource.Play();
+                }
+            }
+
+            // 2. Enable skybox GameObject
+            GameObject skybox = GameObject.Find("Skybox");
+            if (skybox != null)
+            {
+                skybox.SetActive(true);
+            }
+
+            // 3. Switch lights
+            GameObject mainLight = GameObject.Find("Directional Light");
+            GameObject nightLight = GameObject.Find("Night Directional Light");
+
+            if (mainLight != null) mainLight.SetActive(false);
+            if (nightLight != null) nightLight.SetActive(true);
+        }
+    }
+    
+    private IEnumerator FadeAndSwitchScenes(string sceneName)
+    {
+        // Fade to black
+        yield return StartCoroutine(Fade(0f, 1f));
+
+        // Load scene
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+        // Fade back in
+        yield return StartCoroutine(Fade(1f, 0f));
+    }
+
+    private IEnumerator Fade(float startAlpha, float endAlpha)
+    {
+        float timer = 0f;
+        Color color = blinkFadeImage.color;
+
+        while (timer < blinkFadeDuration)
+        {
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, timer / blinkFadeDuration);
+            blinkFadeImage.color = new Color(color.r, color.g, color.b, alpha);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        blinkFadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
     }
 }

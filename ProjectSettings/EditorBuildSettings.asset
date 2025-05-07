@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Vanilla/Meta_VRsetup.unity
     guid: 2ecfedaffad6d4b0a81f912751533dd2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Final scenes/SunsetScene.unity
     guid: fbd6d266da5864ada9dbe4dd3f1fc93a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Final scenes/GodScene.unity
     guid: a434da0498aa949838198f12d8a7f7d8
   m_configObjects:
