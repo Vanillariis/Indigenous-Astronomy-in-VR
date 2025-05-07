@@ -16,10 +16,10 @@ public class FPSLogger : MonoBehaviour
 
     private static FPSLogger instance; // Singleton to ensure only one logger instance across scenes
     
-    // Saving the file after 30 seconds
+    // Saving the file after 15 seconds
     
     public GameObject saveLogTriggerObject; //
-    public float saveDelay = 30f;
+    public float saveDelay = 15f;
 
     private bool saveCountdownStarted = false;
     private float saveTimer = 0f;

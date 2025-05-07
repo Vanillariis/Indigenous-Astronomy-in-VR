@@ -20,10 +20,10 @@ public class HandTrackingLogger : MonoBehaviour
     private List<string> logLines = new List<string>();
     private string filePath;
     
-    // Saving the file after 30 seconds
+    // Saving the file after 15 seconds
     
     public GameObject saveLogTriggerObject; //
-    public float saveDelay = 30f;
+    public float saveDelay = 15f;
 
     private bool saveCountdownStarted = false;
     private float saveTimer = 0f;
