@@ -63,7 +63,10 @@ public class VoiceOver : MonoBehaviour
     public AudioSource twillightSound;
     public AudioSource nightSound;
     private int loadSceneCounter = 0;
-    
+
+    [Header("Start Timer")]
+    public float StartTimer;
+
     void Awake()
     {
         if (Instance == null)
@@ -82,6 +85,12 @@ public class VoiceOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (StartTimer < 10)
+        {
+            StartTimer += Time.deltaTime;
+            return;
+        } 
+
         if (Next == true)
         {
             if (DoneWithPara == true)
@@ -132,7 +141,7 @@ public class VoiceOver : MonoBehaviour
                     ostrichLogic.FeatherHasBeenAttached = true;
                 }
 
-                if (Para == 10) //9 //10
+                if (Para == 9) //9 //10
                 {
                     kite.EndScene = true;
                 }
@@ -288,6 +297,8 @@ public class VoiceOver : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        blinkFadeImage = GameObject.Find("Blink").GetComponent<Image>();
+
         Kite k = FindObjectOfType<Kite>();
         if (k != null)
         {
@@ -302,6 +313,13 @@ public class VoiceOver : MonoBehaviour
         
         if (scene.name == "SunsetScene")
         {
+            sunsetLight = GameObject.Find("Directional Light");
+
+            GameObject audioGM = GameObject.Find("AudioManager");
+            twillightSound = audioGM.transform.GetChild(0).GetComponent<AudioSource>();
+            nightSound = audioGM.transform.GetChild(0).GetComponent<AudioSource>();
+
+
             loadSceneCounter++;
             if (loadSceneCounter == 2)
             {
