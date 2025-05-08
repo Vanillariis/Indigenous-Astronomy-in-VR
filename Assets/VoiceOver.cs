@@ -321,6 +321,11 @@ public class VoiceOver : MonoBehaviour
 
 
             loadSceneCounter++;
+
+            if (loadSceneCounter == 1)
+            {
+                twillightSound.Play();
+            }
             if (loadSceneCounter == 2)
             {
                 // 1. Handle audio switch
