@@ -124,7 +124,7 @@ Material:
     - _DustIntensity: 1.74
     - _DustTiling: 6.42
     - _EnvironmentReflections: 1
-    - _Fade: 1
+    - _Fade: 0.24502869
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -135,7 +135,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PoleFadeSharpness: 0.58
+    - _PoleFadeSharpness: 0.64
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5

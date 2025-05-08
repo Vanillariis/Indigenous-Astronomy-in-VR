@@ -73,7 +73,7 @@ public class StarBurstRenderer : MonoBehaviour
 
     void Update()
     {
-        if (doit == true)
+        if (doit && starBuffer != null)
         {
             float deltaTime = Time.deltaTime;
             float currentTime = Time.time;
@@ -84,6 +84,7 @@ public class StarBurstRenderer : MonoBehaviour
             computeShader.SetVector("origin", origin);
             computeShader.SetFloat("currentTime", currentTime);
 
+            computeShader.SetBuffer(kernelID, "starBuffer", starBuffer); // <== Add this line here
             computeShader.Dispatch(kernelID, Mathf.CeilToInt(starCount / 64f), 1, 1);
 
             starMaterial.SetBuffer("_StarBuffer", starBuffer);
@@ -91,11 +92,10 @@ public class StarBurstRenderer : MonoBehaviour
             starMaterial.SetFloat("_BaseSize", baseSize);
             starMaterial.SetVector("_Origin", origin);
 
-            //renderBounds.center = transform.position;
-
             Graphics.DrawMeshInstancedProcedural(starMesh, 0, starMaterial, renderBounds, starCount);
         }
     }
+
 
     void OnDestroy()
     {

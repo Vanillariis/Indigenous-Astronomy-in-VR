@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -50,6 +51,8 @@ public class OstrichLogic : MonoBehaviour
 
     public AudioSource LightGod_AudioSource;
     public AudioSource DarkGod_AudioSource;
+    
+    public GameObject OstrichLookAtFollower;
 
     [Header("End Scene")]
     public Kite Kite;
@@ -70,6 +73,8 @@ public class OstrichLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OstrichLookAtFollower.transform.position = transform.position;
+        
         // Looks at the z axis may be change to x
         float distance = Vector3.Distance(new Vector3(0, 0, transform.position.z), new Vector3(0, 0, Player.transform.position.z));
 

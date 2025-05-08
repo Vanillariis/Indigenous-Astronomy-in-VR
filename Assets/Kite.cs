@@ -46,6 +46,7 @@ public class Kite : MonoBehaviour
 
     public VoiceOver VoiceOver;
     public OstrichLogic ostrichLogic;
+    public GameObject OldLineRenderer;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,7 +61,7 @@ public class Kite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void FixedUpdate()
@@ -70,8 +71,6 @@ public class Kite : MonoBehaviour
             OstrichLogic.LookAtBird = true;
 
             OstrichLogic.transform.LookAt(transform, Vector3.up);
-
-            Speed = OstrichLogic.Speed;
 
             float journeyProgress = Mathf.InverseLerp(0f, Vector3.Distance(StartPos, EndPoint.transform.position),
                 Vector3.Distance(transform.position, StartPos));
@@ -90,12 +89,13 @@ public class Kite : MonoBehaviour
                 StarBurstRenderer.Explode();
                 
                 Destroy(OstrichLogic.gameObject);
+                Destroy(OldLineRenderer.gameObject);
                 Destroy(this.gameObject);
             }
             else
             {
                 HoistInPoint.transform.parent = transform;
-                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed * 4);
+                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, OstrichLogic.Speed * 1.2f);
                 kiteLine.ground = HoistInPoint.transform;
 
             }
