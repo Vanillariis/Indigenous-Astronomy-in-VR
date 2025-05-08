@@ -1,29 +1,27 @@
 using UnityEngine;
 
-public class FireLightFlicker : MonoBehaviour
+public class SmoothFireLightFlicker : MonoBehaviour
 {
     public Light fireLight;
-    public float minIntensity = 2.5f;
-    public float maxIntensity = 4.5f;
-    public float flickerSpeed = 0.1f;
+    public float baseIntensity = 3.5f;
+    public float intensityVariation = 1.0f;
+    public float flickerSpeed = 1.0f;
 
-    private float timer;
+    private float noiseOffset;
 
     void Start()
     {
         if (fireLight == null)
             fireLight = GetComponent<Light>();
+
+        noiseOffset = Random.Range(0f, 100f);
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
-        {
-            fireLight.intensity = Random.Range(minIntensity, maxIntensity);
-            timer = flickerSpeed * Random.Range(0.5f, 1.5f);
-        }
+        float noise = Mathf.PerlinNoise(Time.time * flickerSpeed, noiseOffset);
+        fireLight.intensity = baseIntensity + (noise - 0.5f) * intensityVariation * 2f;
     }
 }
+
 
