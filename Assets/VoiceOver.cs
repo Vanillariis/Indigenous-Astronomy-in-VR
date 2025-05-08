@@ -118,6 +118,7 @@ public class VoiceOver : MonoBehaviour
                 if (Para == 2) //2
                 {
                     StartCoroutine(FadeAndSwitchScenes("GodScene"));
+                    FadeTo2D();
                 }
 
                 if (Para == 4) //4
@@ -139,6 +140,7 @@ public class VoiceOver : MonoBehaviour
                 if (Para == 11) // 12 // 11
                 {
                     StartCoroutine(FadeAndSwitchScenes("SunsetScene"));
+                    FadeTo3D();
                 }
 
                 if (ShowText == true)
@@ -343,5 +345,35 @@ public class VoiceOver : MonoBehaviour
         }
 
         blinkFadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
+    }
+
+
+
+    public void FadeTo2D()
+    {
+        StartCoroutine(FadeSpatialBlend(0f));
+    }
+
+    public void FadeTo3D()
+    {
+        StartCoroutine(FadeSpatialBlend(1f));
+    }
+
+
+    private IEnumerator FadeSpatialBlend(float target)
+    {
+        float start = AudioSource.spatialBlend;
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            AudioSource.spatialBlend = Mathf.Lerp(start, target, t / fadeDuration);
+            AudioSourceDub.spatialBlend = Mathf.Lerp(start, target, t / fadeDuration);
+            yield return null;
+        }
+
+        AudioSource.spatialBlend = target;
+        AudioSourceDub.spatialBlend = target;
     }
 }
