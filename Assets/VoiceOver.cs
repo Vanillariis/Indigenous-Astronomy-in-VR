@@ -106,7 +106,11 @@ public class VoiceOver : MonoBehaviour
                     return;
                 }
 
-                if (Para >= VoiceParas.Count) return;
+                if (Para >= VoiceParas.Count)
+                {
+                    StartCoroutine(FadeEnd());
+                    return;
+                }
 
 
                 if (Auto == false)
@@ -352,6 +356,13 @@ public class VoiceOver : MonoBehaviour
 
         // Fade back in
         yield return StartCoroutine(Fade(1f, 0f));
+    }
+
+    private IEnumerator FadeEnd()
+    {
+        // Fade to black
+        yield return StartCoroutine(Fade(0f, 1f));
+
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
