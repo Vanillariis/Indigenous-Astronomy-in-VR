@@ -63,7 +63,10 @@ public class VoiceOver : MonoBehaviour
     public AudioSource twillightSound;
     public AudioSource nightSound;
     private int loadSceneCounter = 0;
-    
+
+    [Header("Start Timer")]
+    public float StartTime;
+
     void Awake()
     {
         if (Instance == null)
@@ -82,6 +85,13 @@ public class VoiceOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (StartTime < 10)
+        {
+            StartTime += Time.deltaTime;
+            return;
+        }
+
+
         if (Next == true)
         {
             if (DoneWithPara == true)
