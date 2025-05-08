@@ -131,12 +131,12 @@ public class VoiceOver : MonoBehaviour
                     ostrichLogic.FeatherHasBeenAttached = true;
                 }
 
-                if (Para == 9) //9
+                if (Para == 10) //9 //10
                 {
                     kite.EndScene = true;
                 }
 
-                if (Para == 12) // 12
+                if (Para == 11) // 12 // 11
                 {
                     StartCoroutine(FadeAndSwitchScenes("SunsetScene"));
                 }
