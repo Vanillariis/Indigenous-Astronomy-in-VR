@@ -85,7 +85,7 @@ public class VoiceOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StartTimer < 10)
+        if (StartTimer < 20)
         {
             StartTimer += Time.deltaTime;
             return;
