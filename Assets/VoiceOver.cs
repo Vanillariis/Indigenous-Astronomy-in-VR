@@ -13,15 +13,19 @@ using UnityEngine.UI;
 public class VoicePara
 {
     public AudioClip Audio;
+    public AudioClip AudioShorten;
     public AudioClip AudioDub;
 
     [TextArea(10, 30)]
     public string Translation;
 }
 
+public enum ProjectTypes { TouristLong, TouristShorten, Juhoan };
 
 public class VoiceOver : MonoBehaviour
 {
+    public ProjectTypes ProjectType;
+
     public bool Next;
     public bool Auto;
     public bool ShowText;
@@ -73,6 +77,8 @@ public class VoiceOver : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            AudioSource.volume = AudioSourceVolume_Max;
         }
         else
         {
@@ -105,6 +111,13 @@ public class VoiceOver : MonoBehaviour
 
                     return;
                 }
+                
+                if (ostrichLogic.LightGod_AudioSource.isPlaying == true)
+                {
+                    return;
+                }
+
+
 
                 if (Para >= VoiceParas.Count)
                 {
@@ -121,12 +134,25 @@ public class VoiceOver : MonoBehaviour
                 DoneWithPara = false;
                 DoneWithTranslation = false;
 
+                if (ProjectType == ProjectTypes.TouristShorten)
+                {
+                    AudioSource.clip = VoiceParas[Para].AudioShorten;
+                }
+                else
+                {
+                    AudioSource.clip = VoiceParas[Para].Audio;
+                }
 
-                AudioSource.clip = VoiceParas[Para].Audio;
+
                 AudioSourceDub.clip = VoiceParas[Para].AudioDub;
                 AudioSource.Play();
 
-                StartCoroutine(PipiEffect());
+
+                if (ProjectType != ProjectTypes.Juhoan)
+                {
+                    StartCoroutine(PipiEffect());
+                }
+
 
                 if (Para == 2) //2
                 {
@@ -313,6 +339,18 @@ public class VoiceOver : MonoBehaviour
             OstrichPare = ostrichLogic.transform.parent.gameObject;
 
             ostrichLogic.VoiceOver = this;
+
+
+            if (ProjectType == ProjectTypes.Juhoan)
+            {
+                ostrichLogic.DarkGod_AudioSource.clip = ostrichLogic.JuhoanGods;
+                ostrichLogic.LightGod_AudioSource.clip = ostrichLogic.JuhoanGods;
+            }
+            else
+            {
+                ostrichLogic.DarkGod_AudioSource.clip = ostrichLogic.EnglishGods;
+                ostrichLogic.LightGod_AudioSource.clip = ostrichLogic.EnglishGods;
+            }
         }
         
         if (scene.name == "SunsetScene")

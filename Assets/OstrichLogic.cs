@@ -51,7 +51,10 @@ public class OstrichLogic : MonoBehaviour
 
     public AudioSource LightGod_AudioSource;
     public AudioSource DarkGod_AudioSource;
-    
+
+    public AudioClip EnglishGods;
+    public AudioClip JuhoanGods;
+
     public GameObject OstrichLookAtFollower;
 
     [Header("End Scene")]
