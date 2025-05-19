@@ -111,10 +111,13 @@ public class VoiceOver : MonoBehaviour
 
                     return;
                 }
-                
-                if (ostrichLogic.LightGod_AudioSource.isPlaying == true)
+
+                if (ostrichLogic != null) 
                 {
-                    return;
+                    if (ostrichLogic.LightGod_AudioSource.isPlaying == true)
+                    {
+                        return;
+                    }
                 }
 
 
