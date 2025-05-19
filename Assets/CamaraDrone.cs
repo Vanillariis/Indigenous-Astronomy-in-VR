@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class CamaraDrone : MonoBehaviour
 {
-    public int Speed;
+    public float Speed;
 
     public GameObject StartPoint;
     public GameObject EndPoint;
 
     public Quaternion RotationTarget;
 
+    public float WaitTimer;
 
     void Start()
     {
@@ -18,11 +19,18 @@ public class CamaraDrone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (Vector3.Distance(transform.position, EndPoint.transform.position) < .1)
         {
-            Quaternion.RotateTowards(transform.rotation, RotationTarget, Speed);
+            if (WaitTimer > 2)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, RotationTarget, Speed /2);
+            }
+            else
+            {
+                WaitTimer += Time.deltaTime;
+            } 
         }
         else
         {
