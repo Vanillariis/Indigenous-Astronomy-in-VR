@@ -1,8 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
+
 
 public class CamaraDrone : MonoBehaviour
 {
+    public bool TakePicture;
+
     public float Speed;
+
+    public bool DoTheDrone;
 
     public GameObject StartPoint;
     public GameObject EndPoint;
@@ -13,31 +22,43 @@ public class CamaraDrone : MonoBehaviour
 
     void Start()
     {
-        transform.position = StartPoint.transform.position;
+        if (DoTheDrone == true)
+        {
+            transform.position = StartPoint.transform.position;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        if (Vector3.Distance(transform.position, EndPoint.transform.position) < .1)
+        if (DoTheDrone == true)
         {
-            if (WaitTimer > 2)
+            if (Vector3.Distance(transform.position, EndPoint.transform.position) < .1)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, RotationTarget, Speed /2);
+                if (WaitTimer > 2)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, RotationTarget, Speed / 2);
+                }
+                else
+                {
+                    WaitTimer += Time.deltaTime;
+                }
             }
             else
             {
-                WaitTimer += Time.deltaTime;
-            } 
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed);
+                transform.position = Vector3.MoveTowards(transform.position, EndPoint.transform.position, Speed);
+            }
         }
 
 
         
+        if (TakePicture == true)
+        {
+            ScreenCapture.CaptureScreenshot(Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "pooo" + ".png"), 8);
+            Debug.Log("Screenshot Captured");
+
+            TakePicture = false;
+        }
+
     }
 }
