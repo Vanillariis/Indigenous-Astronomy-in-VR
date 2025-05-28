@@ -35,6 +35,9 @@ public class SkyBoxSequenceController : MonoBehaviour
     public AudioClip glitter;
     private bool glitterOnce;
 
+    public float skyBoxTimer;
+    public VoiceOver voiceOver;
+
     void Start()
     {
         starfieldSkyboxMaterial.SetFloat("_Fade", 0);
@@ -46,6 +49,7 @@ public class SkyBoxSequenceController : MonoBehaviour
         {
 
             timer += Time.deltaTime;
+            
 
             if (!explosionTriggered && timer >= explosionDelay)
             {
@@ -65,6 +69,14 @@ public class SkyBoxSequenceController : MonoBehaviour
                 float t = (Time.time - fadeStartTime) / skyboxFadeDuration;
                 float intensity = Mathf.Lerp(0f, maxSkyboxIntensity, t);
                 starfieldSkyboxMaterial.SetFloat("_Fade", intensity);
+                if (skyBoxTimer >= 60f)
+                {
+                    voiceOver.waitingForExplosion = false;
+                }
+                else
+                {
+                    skyBoxTimer += Time.deltaTime;
+                }
             }
 
 

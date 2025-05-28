@@ -71,6 +71,9 @@ public class VoiceOver : MonoBehaviour
     [Header("Start Timer")]
     public float StartTimer;
 
+    public bool waitingForExplosion;
+    public SkyBoxSequenceController skyboxSequenceController;
+
     void Awake()
     {
         if (Instance == null)
@@ -108,7 +111,12 @@ public class VoiceOver : MonoBehaviour
                         StartCoroutine(SpeakInstruction());
                         InstructionOnce = true;
                     }
+                    
+                    return;
+                }
 
+                if (waitingForExplosion == true)
+                {
                     return;
                 }
 
@@ -172,6 +180,11 @@ public class VoiceOver : MonoBehaviour
                 if (Para == 5) // 5
                 {
                     ostrichLogic.FeatherHasBeenAttached = true;
+                }
+
+                if (Para == 10)
+                {
+                    waitingForExplosion = true;
                 }
 
                 if (Para == 9) //9 //10
@@ -342,6 +355,8 @@ public class VoiceOver : MonoBehaviour
             OstrichPare = ostrichLogic.transform.parent.gameObject;
 
             ostrichLogic.VoiceOver = this;
+            skyboxSequenceController = FindObjectOfType<SkyBoxSequenceController>();
+            skyboxSequenceController.voiceOver = this;
 
 
             if (ProjectType == ProjectTypes.Juhoan)
