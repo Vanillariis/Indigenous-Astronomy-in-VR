@@ -95,7 +95,10 @@ public class OstrichLogic : MonoBehaviour
 
                 CastFeatherOnce = true;
 
-                FeatherHasBeenAttached = false;
+                if (FeatherCast < 3)
+                {
+                    FeatherHasBeenAttached = false;
+                }
 
                 FeatherCast += 1;
             }

@@ -66,7 +66,7 @@ public class Kite : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (EndScene == true && OstrichLogic.ReadyForEnd == true && Vector3.Distance(transform.position, OstrichLogic.transform.position) < 30)
+        if (EndScene == true && FeatherAttacheds == 4 && OstrichLogic.ReadyForEnd == true && Vector3.Distance(transform.position, OstrichLogic.transform.position) < 30)
         {
             OstrichLogic.LookAtBird = true;
 
@@ -111,7 +111,11 @@ public class Kite : MonoBehaviour
 
                 if (FeatherAttacheded == true)
                 {
-                    FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+                    if (FeatherAttacheds != 4)
+                    {
+                        FindAnyObjectByType<OstrichLogic>().FeatherHasBeenAttached = true;
+                    }
+
                     VoiceOver.Instruction = false;
                     VoiceOver.InstructionOnce = false;
                     FeatherAttacheded = false;

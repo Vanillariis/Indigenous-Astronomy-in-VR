@@ -69,7 +69,7 @@ public class SkyBoxSequenceController : MonoBehaviour
                 float t = (Time.time - fadeStartTime) / skyboxFadeDuration;
                 float intensity = Mathf.Lerp(0f, maxSkyboxIntensity, t);
                 starfieldSkyboxMaterial.SetFloat("_Fade", intensity);
-                if (skyBoxTimer >= 60f)
+                if (skyBoxTimer >= 30f)
                 {
                     voiceOver.waitingForExplosion = false;
                 }

@@ -182,15 +182,29 @@ public class VoiceOver : MonoBehaviour
                     ostrichLogic.FeatherHasBeenAttached = true;
                 }
 
-                if (Para == 10)
+                //Para for diffrent Project Types
+                if (ProjectType == ProjectTypes.TouristShorten)
                 {
-                    waitingForExplosion = true;
+                    if (Para == 8) //9 //10
+                    {
+                        kite.EndScene = true;
+                        ostrichLogic.FeatherHasBeenAttached = true;
+                    }
+
+                    if (Para == 10)
+                    {
+                        waitingForExplosion = true;
+                    }
+                }
+                else
+                {
+                    if (Para == 9)
+                    {
+                        kite.EndScene = true;
+                        ostrichLogic.FeatherHasBeenAttached = true;
+                    }
                 }
 
-                if (Para == 9) //9 //10
-                {
-                    kite.EndScene = true;
-                }
 
                 if (Para == 11) // 12 // 11
                 {
